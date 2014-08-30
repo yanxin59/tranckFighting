@@ -51,7 +51,7 @@ bool ControllerLayer::init(){
     item4->setPosition(Vec2(300,200));
     
     
-    MenuItemImage * item = MenuItemImage::create("SodRollCap.png","SodRollCap.png",[=](Ref * sender){
+    MenuItemImage * item = MenuItemImage::create("fire_button_default.png","fire_button_press.png",[=](Ref * sender){
     
         
         sp->mineFireEnemy();
@@ -59,6 +59,10 @@ bool ControllerLayer::init(){
             
     
     });
+    
+    auto sprite = Sprite::create("control_bg.png");
+    this->addChild(sprite);
+    sprite->setPosition(Vec2(800,150));
     
     item->setPosition(Vec2(800,150));
     
