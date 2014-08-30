@@ -14,7 +14,17 @@ bool Bullet::init(float r, Vec2 v){
 	//根据坦克角度旋转子弹
 	this->setRotation(r);
 	//将子弹初始位置置为坦克位置
-	this->setPosition(v);
+	auto ss = sp->getContentSize() * 5;
+	switch ((int)r){
+	case 0:ss.width = 0;break;
+	case 90:ss.height = 0;break;
+	case 180:ss.width = 0; ss.height = -ss.height;break;
+	case 270:ss.height = 0; ss.width = -ss.width;break;
+	default:
+		break;
+	}
+	auto vs = v + ss;
+	this->setPosition(vs);
 	//将子弹加入容器
 	BulletsBox::getInstance()->addBullet(this);
 	//移动
@@ -68,7 +78,11 @@ void Bullet::BulletsMove(){
 	float number = sum - positionBullet;
 	//移动动画
 	auto move = MoveBy::create(number/BULLETSPEED, Vec2(moveX, moveY));
-	this->runAction(move);
+	auto cf = CallFunc::create([=](){
+		BulletsBox::getInstance()->deleteBullet(this);
+		deleteBullet();
+	});
+	this->runAction(Sequence::create(move, cf, NULL));
 }
 
 //删除Node

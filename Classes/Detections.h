@@ -2,12 +2,14 @@
 #define __DETECTIOMS_H_
 #include <cocos2d.h>
 #include "Bullet.h"
+#include "Enemy.h"
 USING_NS_CC;
 
 class Detections{
 public:
 	static Detections* getInstance();
 	bool BulletBullet(Bullet* b1, Bullet* b2);
+	bool BulletBullet(Bullet* b1, Enemy* e1);
 protected:
 	static Detections* instance;
 	

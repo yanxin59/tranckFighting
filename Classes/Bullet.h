@@ -4,7 +4,7 @@
 USING_NS_CC;
 
 //子弹速度
-#define BULLETSPEED 100
+#define BULLETSPEED 500
 //子弹攻击
 #define BULLETATTACK 100
 

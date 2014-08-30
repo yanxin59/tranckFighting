@@ -1,5 +1,6 @@
 #include "AppDelegate.h"
 #include "ControllerLayer.h"
+#include "GameScene.h"
 
 USING_NS_CC;
 
@@ -19,7 +20,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
         glview = GLView::create("My Game");
         director->setOpenGLView(glview);
     }
-
+	srand(time(0));                //获得角度随机种子
     // turn on display FPS
     director->setDisplayStats(true);
 
@@ -27,16 +28,11 @@ bool AppDelegate::applicationDidFinishLaunching() {
     director->setAnimationInterval(1.0 / 60);
 
     // create a scene. it's an autorelease object
-//    auto scene = HelloWorld::createScene();
+    auto scene = GameScene::create();
 
     // run
-//    director->runWithScene(scene);
-
-    auto scene = Scene::create();
-    auto layer = ControllerLayer::create();
-    scene->addChild(layer);
-    
     director->runWithScene(scene);
+
     
     
     return true;

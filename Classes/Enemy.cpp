@@ -1,11 +1,14 @@
 #include "Enemy.h"
 #include "EnemyVector.h"
 #include "time.h"
+#include "Bullet.h"
+#include "BulletLayer.h"
+#include "GameScene.h"
 bool Enemy::init(){
 	if(!Node::init()){
 		return false;
 	}
-	srand(time(0));                                  //获得角度随机种子
+	
 	HP = BASEHP;
 	jd = 180;
 	speed = SPEED;
@@ -17,10 +20,15 @@ bool Enemy::init(){
 	addChild(sp);
 	schedule(schedule_selector(Enemy::changejd),3);  //方向改变计时器
 	schedule(schedule_selector(Enemy::move),0.6);    //行走即障碍规避计时器
+	this->schedule(schedule_selector(Enemy::addFire,this), 1);
 	return true;
 }
-void Enemy::addFire(){
-
+void Enemy::addFire(float t){
+	auto p = this->getPosition();
+	p = p + sp->getContentSize()/2;
+	auto b = Bullet::create((float)jd, p, 2);
+	auto s = dynamic_cast<GameScene*>(Director::getInstance()->getRunningScene());
+	s->getLayer()->addBullet(b);
 }
 bool Enemy::hurt(int attackValue){
 	HP -= attackValue;
