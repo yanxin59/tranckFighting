@@ -1,5 +1,5 @@
 #include "AppDelegate.h"
-
+#include "ControllerLayer.h"
 
 USING_NS_CC;
 
@@ -32,6 +32,13 @@ bool AppDelegate::applicationDidFinishLaunching() {
     // run
 //    director->runWithScene(scene);
 
+    auto scene = Scene::create();
+    auto layer = ControllerLayer::create();
+    scene->addChild(layer);
+    
+    director->runWithScene(scene);
+    
+    
     return true;
 }
 
