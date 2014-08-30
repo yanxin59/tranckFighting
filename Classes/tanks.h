@@ -19,14 +19,11 @@ private:
     
     tanks()
     
-    {
-        sp = Sprite::create("p1-a-cell-hd.png");
-        
-        sp->setPosition(Vec2(480,320));
-        
-        this->addChild(sp);
+        {
+            sp = Sprite::create("monster_59.png",Rect(0,0,64,96));
+            this->addChild(sp);
+        }
     
-    }
     
     tanks(const tanks & anotherTank)
     {
@@ -43,13 +40,13 @@ private:
 protected:
     
     Sprite * sp;
-    
+
     static tanks * instance;
     
     CREATE_FUNC(tanks);
     
     virtual void mineTankDie();
-    
+
     Vec2 position;
   
     int rotation;
@@ -69,6 +66,16 @@ public:
     virtual void left();
     
     virtual void right();
+
+    virtual void playdownAnimation();
+    
+    virtual void playupAnimation();
+    
+    virtual void playleftAnimation();
+    
+    virtual void playrightAnimation();
+    
+    
 
 
 };

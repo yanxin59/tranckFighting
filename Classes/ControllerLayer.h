@@ -17,6 +17,7 @@ protected:
     
     virtual bool init();
     
+
     Vec2 tankPosition;
     
 public:
@@ -31,8 +32,7 @@ public:
     
     CC_SYNTHESIZE(std::function<void ()>, right, Right);
     
-    
-    
+
     
 };
 

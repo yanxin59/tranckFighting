@@ -1,5 +1,6 @@
 #include "AppDelegate.h"
-#include "ControllerLayer.h"
+#include "MainScene.h"
+
 
 USING_NS_CC;
 
@@ -21,7 +22,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     }
 
     // turn on display FPS
-    director->setDisplayStats(true);
+    director->setDisplayStats(false);
 
     // set FPS. the default value is 1.0/60 if you don't call this
     director->setAnimationInterval(1.0 / 60);
@@ -32,10 +33,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
     // run
 //    director->runWithScene(scene);
 
-    auto scene = Scene::create();
-    auto layer = ControllerLayer::create();
-    scene->addChild(layer);
-    
+    auto scene = MainScene::create();
+       
     director->runWithScene(scene);
     
     

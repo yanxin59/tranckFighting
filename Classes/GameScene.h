@@ -15,7 +15,13 @@ using namespace cocos2d;
 
 class GameScene:public Scene
 {
+    
+protected:
+    virtual bool init();
+    
 public:
+    
+    CREATE_FUNC(GameScene);
     
 
 };

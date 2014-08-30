@@ -15,7 +15,10 @@ bool ControllerLayer::init(){
     }
     
    auto sp =  tanks::getInstance();
-    this->addChild(sp);
+    
+   sp->setPosition(Vec2(480,320));
+    
+   this->addChild(sp);
     
     
     
@@ -45,10 +48,10 @@ bool ControllerLayer::init(){
     
     });
     
-    item1->setPosition(Vec2(200,300));
-    item2->setPosition(Vec2(200,100));
-    item3->setPosition(Vec2(100,200));
-    item4->setPosition(Vec2(300,200));
+    item1->setPosition(Vec2(150,250));
+    item2->setPosition(Vec2(150,50));
+    item3->setPosition(Vec2(50,150));
+    item4->setPosition(Vec2(250,150));
     
     
     MenuItemImage * item = MenuItemImage::create("fire_button_default.png","fire_button_press.png",[=](Ref * sender){
@@ -61,17 +64,18 @@ bool ControllerLayer::init(){
     });
     
     auto sprite = Sprite::create("control_bg.png");
-    this->addChild(sprite);
-    sprite->setPosition(Vec2(800,150));
     
-    item->setPosition(Vec2(800,150));
+    this->addChild(sprite);
+    
+    sprite->setPosition(Vec2(850,100));
+    
+    item->setPosition(Vec2(850,100));
     
     Menu * menu = Menu::create(item,item1,item2,item3,item4,NULL);
+    
     menu->setPosition(Vec2(0,0));
+    
     this->addChild(menu);
-    
-    
-    
     
     return true;
 }

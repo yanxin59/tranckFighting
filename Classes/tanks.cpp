@@ -15,12 +15,11 @@ tanks * tanks::getInstance() {
     if (!instance) {
         
         instance = tanks::create();
-        
-        
     }
     
      return instance;
 }
+
 
 
 
@@ -29,14 +28,9 @@ void tanks::mineFireEnemy(){
     sp->setPosition(sp->getPosition());
     
     sp->setRotation(sp->getRotation());
-
-    
-    
 }
 
 void tanks::mineTankDie(){
-    
-    
     
 }
 
@@ -44,74 +38,170 @@ void tanks::mineTankDie(){
 
 void tanks::up(){
     
-    sp->setPositionY(sp->getPositionY()+sp->getContentSize().height/2);
+    setPositionY(getPositionY()+sp->getContentSize().height/2);
     
     Size s = Director::getInstance()->getVisibleSize();
     
     Size sps = sp->getContentSize();
     
     
-    if (sp->getPositionY() >= (s.height - sps.height/2)) {
+    if (getPositionY() >= (s.height - sps.height/2)) {
         
-        sp->setPositionY(s.height - sps.height/2);
+        setPositionY(s.height - sps.height/2);
         
     }
-             sp->setRotation(0);
+    sp->stopAllActions();
+    
+    playupAnimation();
     
 }
 
 void tanks::down(){
     
-    sp->setPositionY(sp->getPositionY()-sp->getContentSize().height/2);
-    
- 
+    setPositionY(getPositionY()-sp->getContentSize().height/2);
     
     Size sps = sp->getContentSize();
     
-    if (sp->getPositionY() < sps.height/2) {
+    if (getPositionY() < sps.height/2) {
         
-        sp->setPositionY(sps.height/2);
+        setPositionY(sps.height/2);
     }
 
+   sp->stopAllActions();
     
-    sp->setRotation(180);
+    playdownAnimation();
     
 }
 
 void tanks::left(){
     
     
-    sp->setPositionX(sp->getPositionX()-sp->getContentSize().width/2);
+    setPositionX(getPositionX()-sp->getContentSize().width/2);
     
        Size sps = sp->getContentSize();
     
-    if (sp->getPositionX() < sps.width/2) {
+    if (getPositionX() < sps.width/2) {
         
-        sp->setPositionX(sps.width/2);
+        setPositionX(sps.width/2);
     }
 
+    sp->stopAllActions();
     
-    sp->setRotation(270);
+    playleftAnimation();
     
 }
 
 void tanks::right(){
     
     
-    sp->setPositionX(sp->getPositionX()+sp->getContentSize().width/2);
+    setPositionX(getPositionX()+sp->getContentSize().width/2);
     
     Size s = Director::getInstance()->getVisibleSize();
     
     Size sps = sp->getContentSize();
 
     
-    if (sp->getPositionX() >= (s.width-sps.width/2 )) {
+    if (getPositionX() >= (s.width-sps.width/2 )) {
         
-        sp->setPositionX(s.width-sps.width/2);
+        setPositionX(s.width-sps.width/2);
     }
-    
 
+    sp->stopAllActions();
     
-    sp->setRotation(90);
+    playrightAnimation();
     
 }
+
+
+void tanks::playdownAnimation(){
+    
+    auto anim = Animation::create();
+    
+    anim->addSpriteFrame(SpriteFrame::create("monster_59.png",Rect(0,0,64,96)));
+    
+    anim->addSpriteFrame(SpriteFrame::create("monster_59.png",Rect(64,0,64,96)));
+    
+    anim->addSpriteFrame(SpriteFrame::create("monster_59.png",Rect(128,0,64,96)));
+    
+    anim->addSpriteFrame(SpriteFrame::create("monster_59.png",Rect(192,0,64,96)));
+                         
+    anim->setDelayPerUnit(0.2);
+                         
+    anim->setLoops(-1);
+                         
+    sp->runAction(Animate::create(anim));
+                         
+    
+}
+
+void tanks::playupAnimation(){
+    
+    
+    
+    auto anim = Animation::create();
+    
+    anim->addSpriteFrame(SpriteFrame::create("monster_59.png",Rect(0,288,64,96)));
+    
+    anim->addSpriteFrame(SpriteFrame::create("monster_59.png",Rect(64,288,64,96)));
+    
+    anim->addSpriteFrame(SpriteFrame::create("monster_59.png",Rect(128,288,64,96)));
+    
+    anim->addSpriteFrame(SpriteFrame::create("monster_59.png",Rect(192,288,64,96)));
+    
+    anim->setDelayPerUnit(0.2);
+    
+    anim->setLoops(-1);
+    
+    sp->runAction(Animate::create(anim));
+    
+    
+}
+
+void tanks::playleftAnimation(){
+    
+    
+    
+    auto anim = Animation::create();
+    
+    anim->addSpriteFrame(SpriteFrame::create("monster_59.png",Rect(0,96,64,96)));
+    
+    anim->addSpriteFrame(SpriteFrame::create("monster_59.png",Rect(64,96,64,96)));
+    
+    anim->addSpriteFrame(SpriteFrame::create("monster_59.png",Rect(128,96,64,96)));
+    
+    anim->addSpriteFrame(SpriteFrame::create("monster_59.png",Rect(192,96,64,96)));
+    
+    anim->setDelayPerUnit(0.2);
+    
+    anim->setLoops(-1);
+    
+    sp->runAction(Animate::create(anim));
+    
+    
+}
+
+void tanks::playrightAnimation(){
+    
+    
+    
+    auto anim = Animation::create();
+    
+    anim->addSpriteFrame(SpriteFrame::create("monster_59.png",Rect(0,192,64,96)));
+    
+    anim->addSpriteFrame(SpriteFrame::create("monster_59.png",Rect(64,192,64,96)));
+    
+    anim->addSpriteFrame(SpriteFrame::create("monster_59.png",Rect(128,192,64,96)));
+    
+    anim->addSpriteFrame(SpriteFrame::create("monster_59.png",Rect(192,192,64,96)));
+    
+    anim->setDelayPerUnit(0.2);
+    
+    anim->setLoops(-1);
+    
+    sp->runAction(Animate::create(anim));
+    
+    
+}
+
+
+
