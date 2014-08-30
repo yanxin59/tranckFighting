@@ -20,6 +20,8 @@ public:
 	CREATE_FUNC(BulletLayer);
 	//将子弹贴在层上
 	void addBullet(Bullet* b);
+protected:
+	void update(float t);
 };
 
 
