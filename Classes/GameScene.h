@@ -10,29 +10,17 @@
 #define __tranckFighting__GameScene__
 
 #include "cocos2d.h"
-#include "BulletLayer.h"
+
 
 using namespace cocos2d;
-
-<<<<<<< HEAD
-class GameScene:public Scene
-{
-    
-protected:
-    virtual bool init();
-    
-public:
-    
-    CREATE_FUNC(GameScene);
-    
-
-=======
+class BulletLayer;
+class Maps;
 class GameScene:public Scene{
 public:
     virtual bool init();
 	CREATE_FUNC(GameScene);
 	BulletLayer* getLayer();
->>>>>>> c4bbd9cd6e5e193394b45530f9f4da713d3f46c9
+	Maps * getMap();
 };
 
 #endif /* defined(__tranckFighting__GameScene__) */

@@ -1,11 +1,6 @@
 #include "AppDelegate.h"
-<<<<<<< HEAD
-#include "MainScene.h"
-
-=======
 #include "ControllerLayer.h"
 #include "GameScene.h"
->>>>>>> c4bbd9cd6e5e193394b45530f9f4da713d3f46c9
 
 USING_NS_CC;
 
@@ -27,7 +22,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     }
 	srand(time(0));                //获得角度随机种子
     // turn on display FPS
-    director->setDisplayStats(false);
+    director->setDisplayStats(true);
 
     // set FPS. the default value is 1.0/60 if you don't call this
     director->setAnimationInterval(1.0 / 60);
@@ -36,13 +31,6 @@ bool AppDelegate::applicationDidFinishLaunching() {
     auto scene = GameScene::create();
 
     // run
-<<<<<<< HEAD
-//    director->runWithScene(scene);
-
-    auto scene = MainScene::create();
-       
-=======
->>>>>>> c4bbd9cd6e5e193394b45530f9f4da713d3f46c9
     director->runWithScene(scene);
 
     

@@ -13,13 +13,14 @@ bool Bullet::init(float r, Vec2 v){
 	this->attack = BULLETATTACK;
 	//根据坦克角度旋转子弹
 	this->setRotation(r);
-	//将子弹初始位置置为坦克位置
-	auto ss = sp->getContentSize() * 5;
+	//将子弹初始位置置为坦克位置 + 2个子弹长度，为了看着是从炮口出来
+	auto ss = sp->getContentSize()*2;
+	auto maxs = ss.width > ss.height ? ss.width:ss.height;
 	switch ((int)r){
-	case 0:ss.width = 0;break;
-	case 90:ss.height = 0;break;
-	case 180:ss.width = 0; ss.height = -ss.height;break;
-	case 270:ss.height = 0; ss.width = -ss.width;break;
+	case 0:ss.width = 0;ss.height = maxs;break;
+	case 90:ss.height = 0;ss.width = maxs;break;
+	case 180:ss.width = 0; ss.height = -maxs;break;
+	case 270:ss.height = 0; ss.width = -maxs;break;
 	default:
 		break;
 	}
@@ -65,13 +66,14 @@ void Bullet::BulletsMove(){
 	//得到位置
 	float positionBullet = 0;
 	//根据角度， 位置改变移动方向，距离
-
+	auto bs = this->getContentSize();
+	auto maxs = bs.width > bs.height ? bs.width:bs.height;
 	switch ((int)(this->getRotation())){
 		
-		case 0:sum = Director::getInstance()->getVisibleSize().height;positionBullet = this->getPosition().y;moveY = sum - positionBullet;break;
-		case 90:positionBullet = this->getPosition().x;moveX = sum - positionBullet;break;
-		case 180:sum = 0;positionBullet = -this->getPosition().y;moveY = positionBullet;break;
-		case 270:sum = 0;positionBullet = -this->getPosition().x;moveX = positionBullet;break;
+		case 0:sum = Director::getInstance()->getVisibleSize().height;positionBullet = this->getPosition().y;moveY = sum - positionBullet + maxs;break;
+		case 90:positionBullet = this->getPosition().x;moveX = sum - positionBullet + maxs;break;
+		case 180:sum = 0;positionBullet = -this->getPosition().y;moveY = positionBullet - maxs;break;
+		case 270:sum = 0;positionBullet = -this->getPosition().x;moveX = positionBullet - maxs;break;
 		default:
 			break;
 	}

@@ -3,13 +3,15 @@
 #include "cocos2d.h"
 #define BASEHP 200
 #define SPEED 100
+#define TANK 32                            //坦克宽高
+#define STEP 16                            //一步的距离
 using namespace cocos2d;
 class Enemy:public Node{
 protected:
 	int jd;                                //角度初始180
 	int HP;                                //血量初始200
 	int speed;                             //速度初始100
-	int mark;                             //主机敌机标记
+	int mark;                              //主机敌机标记
 public:
 	virtual bool init();
 	CREATE_FUNC(Enemy);
