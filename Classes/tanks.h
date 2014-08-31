@@ -11,70 +11,34 @@
 
 #include <iostream>
 #include "cocos2d.h"
+//坦克单例
 using namespace cocos2d;
-
 class tanks:public Node{
-    
 private:
-    
-    tanks()
-    
-        {
-            sp = Sprite::create("monster_59.png",Rect(0,0,64,96));
-            this->addChild(sp);
+    tanks(){
+        
+            _pTank = Sprite::create("p1-a-cell.png");
+            this->addChild(_pTank);
         }
-    
-    
-    tanks(const tanks & anotherTank)
-    {
-    
-    
-    }
-    tanks operator = (const tanks & anotherTank)
-    {
-    
+    tanks(const tanks & anotherTank){}//拷贝构造函数:防止单例被构造另一个
+    tanks operator = (const tanks & anotherTank){
+        
         return anotherTank;
-    
-    }
-    
+    }//等号运算符重载:防止单例被复制另一个
 protected:
-    
-    Sprite * sp;
-
+    Sprite * _pTank;
     static tanks * instance;
-    
     CREATE_FUNC(tanks);
-    
-    virtual void mineTankDie();
-
-    Vec2 position;
-  
+    virtual void mineTankDie();//主坦克死亡
     int rotation;
-    
 public:
-    
+    static tanks * getInstance();//获得子弹单例
+    virtual void addFire();//坦克开火(己放坦克打敌方坦克)
+    virtual void up();//坦克向上移动方法
+    virtual void down();//坦克向下移动方法
+    virtual void left();//坦克向左移动方法
+    virtual void right();//坦克向右移动方法
 
-    
-    static tanks * getInstance();
-
-    virtual void mineFireEnemy();
-    
-    virtual void up();
-    
-    virtual void down();
-    
-    virtual void left();
-    
-    virtual void right();
-
-    virtual void playdownAnimation();
-    
-    virtual void playupAnimation();
-    
-    virtual void playleftAnimation();
-    
-    virtual void playrightAnimation();
-    
     
 
 
