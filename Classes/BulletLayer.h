@@ -12,6 +12,7 @@
 #include "Bullet.h"
 USING_NS_CC;
 
+#define MAPCELL 16
 
 //×Óµ¯²ã
 class BulletLayer:public Layer{
