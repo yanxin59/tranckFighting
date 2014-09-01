@@ -24,7 +24,6 @@ bool stopScene::init(){
         
         Director::getInstance()->replaceScene(scene);
         
-    
     });
     item->setPosition(Vec2(480,320));
     

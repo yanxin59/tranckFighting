@@ -21,11 +21,8 @@ bool Enemy::init(){
 	addChild(sp);
 	schedule(schedule_selector(Enemy::changejd),3);  //方向改变计时器
 	schedule(schedule_selector(Enemy::move),0.6);    //行走即障碍规避计时器
-//<<<<<<< HEAD
-	//this->schedule(schedule_selector(Enemy::addFire,this), 1.2);
-//=======
+
 	this->schedule(schedule_selector(Enemy::addFire), 1);
-//>>>>>>> 79abac176493eb5d0a984516b4392662cec1313d
 	return true;
 }
 void Enemy::addFire(float t){
