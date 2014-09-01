@@ -41,7 +41,7 @@ protected:
   
     virtual void mineTankDie();//主坦克死亡
     
-    virtual bool judge();
+    virtual bool judge();//判断前方是否有障碍物
     int rotation;
 public:
     static tanks * getInstance();//获得子弹单例
