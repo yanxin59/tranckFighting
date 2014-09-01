@@ -50,7 +50,7 @@ public:
     virtual void down();//坦克向下移动方法
     virtual void left();//坦克向左移动方法
     virtual void right();//坦克向右移动方法
-
+    virtual Rect getBoundingBox();
 };
 
 

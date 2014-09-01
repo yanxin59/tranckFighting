@@ -18,8 +18,7 @@ tanks * tanks::getInstance()
     if (!instance) {
         instance = tanks::create();
         instance->setPosition(100, 50);
-//        instance->setAnchorPoint(Vec2(0.5,0.5));
-//        log("%.2f, %.2f", instance->getAnchorPoint().x, instance->getAnchorPoint().y);
+
     }
      return instance;
 }
@@ -29,7 +28,6 @@ void tanks::addFire(){
     
     _pTank->setPosition(_pTank->getPosition());
     _pTank->setRotation(_pTank->getRotation());
-
 }
 
 void tanks::mineTankDie(){
@@ -37,6 +35,14 @@ void tanks::mineTankDie(){
     
     
 }
+
+Rect tanks::getBoundingBox()
+{
+    auto tCurPos = getPosition();
+    auto tSize = _pTank->getContentSize();
+    return Rect(tCurPos.x, tCurPos.y, tSize.width, tSize.height);
+}
+
 void tanks::up(){
     
     _pTank->setRotation(0);
