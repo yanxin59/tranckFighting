@@ -10,10 +10,13 @@
 
 void Entity::doDead()
 {
-
 }
 
 void Entity::doAction()
 {
+}
 
+Entity::~Entity()
+{
+    CC_SAFE_RELEASE_NULL(_pSprite);
 }
