@@ -9,10 +9,10 @@
 #ifndef __tranckFighting__BulletLayer__
 #define __tranckFighting__BulletLayer__
 #include <cocos2d.h>
-
+#include "Bullet.h"
 USING_NS_CC;
 
-class Bullet;
+
 //×Óµ¯²ã
 class BulletLayer:public Layer{
 public:

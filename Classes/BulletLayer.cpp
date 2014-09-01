@@ -16,8 +16,17 @@ bool BulletLayer::init(){
 	if (!Layer::init()){
 		return false;
 	}
-	
-	
+	//auto b = Bullet::create(0, Vec2(480, 320));
+	//addBullet(b);
+	//auto b1 = Bullet::create(90, Vec2(180, 220), 1);
+	//b1->setName("1");
+	//addBullet(b1);
+	//auto b2 = Bullet::create(180, Vec2(480, 320));
+	//addBullet(b2);
+	//auto b3 = Bullet::create(270, Vec2(580, 220), 1);
+	//addBullet(b3);
+	//b3->setName("3");
+	//this->schedule(schedule_selector(BulletLayer::update, this), 1);
 	this->scheduleUpdate();
 	return true;
 }
@@ -30,7 +39,7 @@ void BulletLayer::addBullet(Bullet* b){
 void BulletLayer::update(float t){
 	auto v = BulletsBox::getInstance()->getBulletsVector();
 	auto ev = EnemyVector::getInstence()->getEV();
-//	log("%d", v.size());
+	log("%d", v.size());
 	static int a = 0;
 	static int b = 0;
 	for (auto it1 = v.begin(); it1 != v.end();){
