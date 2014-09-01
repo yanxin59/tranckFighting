@@ -19,15 +19,19 @@ public:
     
     virtual void doDead();
     
+    virtual ~Entity();
+    
 protected:
     
-    virtual void doAction();
+    virtual void move();
+    
+    virtual void doAction() = 0;
     
     CC_SYNTHESIZE_PASS_BY_REF(bool, _isDead, IsDead);
     
     CC_SYNTHESIZE_PASS_BY_REF(int, _iSpeed, ISpeed);
     
-    
+    CC_SYNTHESIZE_RETAIN(Sprite*, _pSprite, bindSprite);
 };
 
 #endif /* defined(__tranckFighting__Entity__) */

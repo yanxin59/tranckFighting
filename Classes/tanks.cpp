@@ -48,7 +48,6 @@ void tanks::up(){
     _pTank->setRotation(0);
     if(judge())
         return ;
-    setAnchorPoint(Vec2(0.5, 1));
     setPositionY(getPositionY()+1);
     Size s = Director::getInstance()->getVisibleSize();
     Size sps = _pTank->getContentSize();
@@ -64,7 +63,7 @@ void tanks::down(){
     _pTank->setRotation(180);
     if(judge())
         return ;
-    setAnchorPoint(Vec2(0.5f, 0));
+
     setPositionY(getPositionY()-1);
     Size sps = _pTank->getContentSize();
     if (getPositionY() < sps.height/2) {
@@ -77,7 +76,7 @@ void tanks::left(){
     _pTank->setRotation(270);
     if(judge())
         return ;
-    setAnchorPoint(Vec2(0, 0.5f));
+
     setPositionX(getPositionX()-1);
     Size sps = _pTank->getContentSize();
     if (getPositionX() < sps.width/2) {
@@ -90,7 +89,6 @@ void tanks::right(){
     _pTank->setRotation(90);
     if(judge())
         return ;
-    setAnchorPoint(Vec2(1, 0.5));
     setPositionX(getPositionX()+1);
     Size s = Director::getInstance()->getVisibleSize();
     Size sps = _pTank->getContentSize();
