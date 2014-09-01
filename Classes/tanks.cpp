@@ -7,6 +7,9 @@
 //
 
 #include "tanks.h"
+#include "GameScene.h"
+#include "Map.h"
+
 tanks * tanks::instance = nullptr;
 
 tanks * tanks::getInstance()
@@ -14,8 +17,9 @@ tanks * tanks::getInstance()
     
     if (!instance) {
         instance = tanks::create();
-        
-        
+        instance->setPosition(100, 50);
+//        instance->setAnchorPoint(Vec2(0.5,0.5));
+//        log("%.2f, %.2f", instance->getAnchorPoint().x, instance->getAnchorPoint().y);
     }
      return instance;
 }
@@ -35,8 +39,10 @@ void tanks::mineTankDie(){
 }
 void tanks::up(){
     
-
-
+    _pTank->setRotation(0);
+    if(judge())
+        return ;
+    setAnchorPoint(Vec2(0.5, 1));
     setPositionY(getPositionY()+1);
     Size s = Director::getInstance()->getVisibleSize();
     Size sps = _pTank->getContentSize();
@@ -45,38 +51,99 @@ void tanks::up(){
         setPositionY(s.height - sps.height/2);
     }
 
-    _pTank->setRotation(0);
+
 }
 
 void tanks::down(){
-
-    
+    _pTank->setRotation(180);
+    if(judge())
+        return ;
+    setAnchorPoint(Vec2(0.5f, 0));
     setPositionY(getPositionY()-1);
     Size sps = _pTank->getContentSize();
     if (getPositionY() < sps.height/2) {
         
         setPositionY(sps.height/2);
     }
-
-    
-    _pTank->setRotation(180);
 }
 void tanks::left(){
-    
+ 
+    _pTank->setRotation(270);
+    if(judge())
+        return ;
+    setAnchorPoint(Vec2(0, 0.5f));
     setPositionX(getPositionX()-1);
-   Size sps = _pTank->getContentSize();
+    Size sps = _pTank->getContentSize();
     if (getPositionX() < sps.width/2) {
         setPositionX(sps.width/2);
     }
-    _pTank->setRotation(270);
+
 }
 void tanks::right(){
- 
+
+    _pTank->setRotation(90);
+    if(judge())
+        return ;
+    setAnchorPoint(Vec2(1, 0.5));
     setPositionX(getPositionX()+1);
     Size s = Director::getInstance()->getVisibleSize();
     Size sps = _pTank->getContentSize();
     if (getPositionX() >= (s.width-sps.width/2 )) {
         setPositionX(s.width-sps.width/2);
     }
-    _pTank->setRotation(90);
+
 }
+
+bool tanks::judge()
+{
+    auto tBg = (dynamic_cast<GameScene *>(Director::getInstance()->getRunningScene()))->getMap()->m_bg;
+    
+    auto tRotate = _pTank->getRotation();
+    
+    auto px = 0;
+    auto py = 0;
+    
+    if(tRotate == 0.0f)
+    {
+        log("up");
+        py = (getPositionY() + _pTank->getContentSize().width / 2 + 16) / 16;
+        px = getPositionX() / 16;
+    }
+    
+    if(tRotate == 90.0f)
+    {
+        py = getPositionY() / 16;
+        px = (getPositionX() + _pTank->getContentSize().width / 2 + 16) / 16;
+    }
+    
+    if(tRotate == 180.0f)
+    {
+        py = (getPositionY() - (_pTank->getContentSize().width / 2 + 16)) / 16;
+        px = getPositionX() / 16;
+    }
+    
+    if(tRotate == 270.0f)
+    {
+        py = getPositionY() / 16;
+        px = getPositionX() / 16;
+    }
+    
+    if(px >= 59.0f)
+    {
+        px = 59.0f;
+    }
+    
+    if(py >= 39.0f)
+    {
+        py = 39.0f;
+    }
+    
+    if(tBg->getTileGIDAt(Vec2(px - 1, 40 - py - 1)))
+    {
+        return true;
+    }
+    
+    return false;
+}
+
+

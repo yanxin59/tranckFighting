@@ -5,7 +5,7 @@ bool Bullet::init(float r, Vec2 v){
 	if (!Node::init()){//Sprite::initWithFile("bullet.png")
 		return false;
 	}
-	//初始化队伍
+	//chu'shi
 	team = 0;
 	//创建精灵
 	sp = Sprite::create("bullet.png");

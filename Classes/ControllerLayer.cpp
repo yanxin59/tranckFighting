@@ -46,7 +46,10 @@ bool ControllerLayer::init(){
         auto p1 = Director::getInstance()->convertToGL( t->getLocationInView());
         auto p2 = Director::getInstance()->convertToGL(t ->getPreviousLocationInView());
         auto p3 = p1 - p2;
-        if(!tControl->getBoundingBox().containsPoint(tHandle->getPosition())){
+        if(!tControl->getBoundingBox().containsPoint(tHandle->getPosition()) || !tControl->getBoundingBox().containsPoint(p1)){
+            tHandle->setPosition(Vec2(tControl->getContentSize().width/2,tControl->getContentSize().height/2));
+            _iLeft = 0;
+            _iUp = 0;
             return;
         }
         tHandle->setPosition(tHandle->getPosition() + p3);

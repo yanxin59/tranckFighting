@@ -40,6 +40,8 @@ protected:
     Vec2 position;
   
     virtual void mineTankDie();//主坦克死亡
+    
+    virtual bool judge();
     int rotation;
 public:
     static tanks * getInstance();//获得子弹单例
