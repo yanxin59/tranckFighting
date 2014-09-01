@@ -23,7 +23,7 @@ public:
     
 protected:
     
-    virtual void move();
+    virtual void move() = 0;
     
     virtual void doAction() = 0;
     

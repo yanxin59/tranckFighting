@@ -55,8 +55,6 @@ void tanks::up(){
         
         setPositionY(s.height - sps.height/2);
     }
-
-
 }
 
 void tanks::down(){
