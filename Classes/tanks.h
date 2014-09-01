@@ -20,8 +20,9 @@ private:
     tanks()
     {
         
-            _pTank = Sprite::create("p1-a-cell.png");
-            this->addChild(_pTank);
+        _pTank = Sprite::create("p1-a-cell.png");
+        _pTank->setAnchorPoint(Vec2(0, 0));
+        this->addChild(_pTank);
     }
     
     tanks(const tanks & anotherTank){}//拷贝构造函数:防止单例被构造另一个

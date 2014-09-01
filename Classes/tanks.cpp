@@ -57,6 +57,7 @@ void tanks::up(){
         setPositionY(s.height - tSize.height/2);
     }//如果坦克要出了上边界,就让它停留在上边界
 
+        setPositionY(s.height - tSize.height/2);
 
 }
 

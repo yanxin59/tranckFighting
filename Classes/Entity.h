@@ -23,7 +23,7 @@ public:
     
 protected:
     
-    virtual void move();
+    virtual void move() = 0;
     
     virtual void doAction() = 0;
     
@@ -32,6 +32,8 @@ protected:
     CC_SYNTHESIZE_PASS_BY_REF(int, _iSpeed, ISpeed);
     
     CC_SYNTHESIZE_RETAIN(Sprite*, _pSprite, bindSprite);
+    
+    CC_SYNTHESIZE_PASS_BY_REF(int, _entityType, EntityType);
 };
 
 #endif /* defined(__tranckFighting__Entity__) */
