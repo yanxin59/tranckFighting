@@ -16,20 +16,20 @@ bool GameScene::init(){
 	if (!Scene::init()){
 		return false;
 	}
-
 	Maps * map = Maps::create();
 	map->setName("map");
 	this->addChild(map);
-
-	this->addChild(EnemyLayer::create());
+	auto elayer = EnemyLayer::create();
+	elayer->setAnchorPoint(Point::ZERO);
+	elayer->setPosition(Point::ZERO);
+	this->addChild(elayer);
 
 	auto layer = ControllerLayer::create();
     this->addChild(layer);
     
 	auto l = BulletLayer::create();
-	l->setTag(1);
+    l->setTag(1);
 	this->addChild(l);
-	
 	
 	return true;
 }
@@ -40,4 +40,3 @@ BulletLayer* GameScene::getLayer(){
 Maps * GameScene::getMap(){
 	return (Maps *)(getChildByName("map"));
 }
-

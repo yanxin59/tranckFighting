@@ -12,7 +12,6 @@
 #include "cocos2d.h"
 
 
-
 using namespace cocos2d;
 class BulletLayer;
 class Maps;

@@ -132,6 +132,7 @@ bool ControllerLayer::init(){
     });
     
     item->setPosition(Vec2(Director::getInstance()->getVisibleSize().width - (tControl->getContentSize().width/2),tControl->getContentSize().height/2));
+
  
     auto menu = Menu::create(item,NULL);
     this->addChild(menu,1);

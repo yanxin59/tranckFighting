@@ -5,6 +5,7 @@
 #define SPEED 100
 #define TANK 32                            //坦克宽高
 #define STEP 16                            //一步的距离
+#define TIME 0.3
 using namespace cocos2d;
 class Enemy:public Node{
 protected:
@@ -23,5 +24,6 @@ public:
 	Rect * getRect();                      //获得精灵坦克的碰撞体积
 	void changejd(float t);                //改变方向方法
 	void move(float t);
+	int makeTurn();                       //转向方法
 };
 #endif
