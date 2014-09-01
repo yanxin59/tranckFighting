@@ -30,7 +30,7 @@ void BulletLayer::addBullet(Bullet* b){
 void BulletLayer::update(float t){
 	auto v = BulletsBox::getInstance()->getBulletsVector();
 	auto ev = EnemyVector::getInstence()->getEV();
-	log("%d", v.size());
+//	log("%d", v.size());
 	static int a = 0;
 	static int b = 0;
 	for (auto it1 = v.begin(); it1 != v.end();){
