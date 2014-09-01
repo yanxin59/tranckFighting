@@ -24,11 +24,9 @@ bool GameScene::init(){
 	this->addChild(EnemyLayer::create());
 
 	auto layer = ControllerLayer::create();
-    	this->addChild(layer);
-    	
-	this->addChild(EnemyLayer::create());
+    this->addChild(layer);
+    
 	auto l = BulletLayer::create();
-	
 	l->setTag(1);
 	this->addChild(l);
 	
