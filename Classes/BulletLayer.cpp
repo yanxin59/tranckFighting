@@ -101,7 +101,7 @@ void BulletLayer::update(float t){
 		if (!(*it1) || !tan){
 			return;
 		}
-		if ((*it1)->getTeam() == 2){
+		if ((*it1)->getEntityType() == 2){
 			if (Detections::getInstance()->BulletBullet((*it1))){
 				log("zhutan sile");
 			}
@@ -116,9 +116,9 @@ void BulletLayer::update(float t){
 			}	
 			if (Detections::getInstance()->BulletBullet((*it1), (*it2))){
 				BulletsBox::getInstance()->deleteBullet((*it1));
-				(*it1)->deleteBullet();
+				(*it1)->doDead();
 				BulletsBox::getInstance()->deleteBullet((*it2));
-				(*it2)->deleteBullet();
+				(*it2)->doDead();
 				a = 1;
 				break;
 			}
@@ -133,14 +133,14 @@ void BulletLayer::update(float t){
 			if (!(*it3)){
 				return;
 			}
-			if ((*it1)->getTeam() == 2){
+			if ((*it1)->getEntityType() == 2){
 				it3 ++;
 				continue;
 			}
 			if (Detections::getInstance()->BulletBullet((*it1), (*it3))){
 				(*it3)->hurt((*it1)->getAttack());
 				BulletsBox::getInstance()->deleteBullet((*it1));
-				(*it1)->deleteBullet();
+				(*it1)->doDead();
 				b = 1;
 				break;;
 			}

@@ -6,15 +6,17 @@ bool Bullet::init(float r, Vec2 v){
 		return false;
 	}
 	//初始化队伍
-	team = 0;
+	setEntityType(0);
+	//设置速度
+	setISpeed(300);
 	//创建精灵
-	sp = Sprite::create("bullet.png");
+	setbindSprite(Sprite::create("bullet.png"));
 	//攻击力
 	this->attack = BULLETATTACK;
 	//根据坦克角度旋转子弹
 	this->setRotation(r);
 	//将子弹初始位置置为坦克位置 + 2个子弹长度，为了看着是从炮口出来
-	auto ss = sp->getContentSize()*2;
+	auto ss = getbindSprite()->getContentSize()*2;
 	auto maxs = ss.width > ss.height ? ss.width:ss.height;
 	switch ((int)r){
 	case 0:ss.width = 0;ss.height = maxs;break;
@@ -29,17 +31,21 @@ bool Bullet::init(float r, Vec2 v){
 	//将子弹加入容器
 	BulletsBox::getInstance()->addBullet(this);
 	//移动
-	BulletsMove();
+	move();
 	//添加
-	this->addChild(sp);
+	this->addChild(getbindSprite());
 	return true;
+}
+
+void Bullet::doAction(){
+
 }
 
 Bullet* Bullet::create(float r, Vec2 v, int t){
 	auto b = new Bullet();
 	if (b && b->init(r, v)){
 		b->autorelease();
-		b->team = t;
+		b->setEntityType(t);
 		//根据角度转换子弹方向
 		switch ((int)r){
 			case 0:b->setRotation(0);break;
@@ -56,7 +62,7 @@ Bullet* Bullet::create(float r, Vec2 v, int t){
 }
 
 //子弹移动动画
-void Bullet::BulletsMove(){
+void Bullet::move(){
 	//设置移动允许的最大值，现在为屏幕宽度
 	float sum = Director::getInstance()->getVisibleSize().width;
 	
@@ -79,15 +85,15 @@ void Bullet::BulletsMove(){
 	}
 	float number = sum - positionBullet;
 	//移动动画
-	auto move = MoveBy::create(number/BULLETSPEED, Vec2(moveX, moveY));
+	auto move = MoveBy::create(number/getISpeed(), Vec2(moveX, moveY));
 	auto cf = CallFunc::create([=](){
 		BulletsBox::getInstance()->deleteBullet(this);
-		deleteBullet();
+		doDead();
 	});
 	this->runAction(Sequence::create(move, cf, NULL));
 }
 
 //删除Node
-void Bullet::deleteBullet(){
+void Bullet::doDead(){
 	this->removeFromParentAndCleanup(true);
 }

@@ -10,6 +10,7 @@ public:
 	static Detections* getInstance();
 	bool BulletBullet(Bullet* b1, Bullet* b2);
 	bool BulletBullet(Bullet* b1, Enemy* e1);
+	bool BulletBullet(Bullet* b);
 protected:
 	static Detections* instance;
 	
