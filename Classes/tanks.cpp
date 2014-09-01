@@ -111,7 +111,6 @@ bool tanks::judge()
     
     if(tRotate == 0.0f)
     {
-        log("up");
         py = (getPositionY() + _pTank->getContentSize().width / 2 + 16) / 16;
         px = getPositionX() / 16;
     }
