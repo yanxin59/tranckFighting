@@ -13,8 +13,8 @@ using namespace cocos2d;
 class ControllerLayer:public Layer{
 protected:
     virtual bool init();
-    int _iLeft = 0 ;
-    int _iUp = 0;
+    int _iLeft;
+    int _iUp;
 public:
     CREATE_FUNC(ControllerLayer);
     virtual void update(float t);

@@ -16,7 +16,8 @@ public:
 	static Bullet* create(float r, Vec2 v, int t);
 	//»ñÈ¡¹¥»÷Á¦
 	CC_SYNTHESIZE_READONLY(int, attack, Attack);
-	 virtual void doDead();
+	virtual void doDead();
+	CC_SYNTHESIZE_READONLY(Size, buletsize, BulletSize);
 protected:
 	virtual void doAction();
 	virtual void move();

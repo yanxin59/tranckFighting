@@ -50,54 +50,251 @@ void BulletLayer::update(float t){
 	cocos2d::TMXLayer *iron = map->m_iron;
 	auto tan = tanks::getInstance();
 	
-	//log("%d", v.size());
 	static int a = 0;
-	static int b = 0;
-	//float x = 0;
-	//float y = 0;
 	for (auto it1 = v.begin(); it1 != v.end();){
-		/*auto bsize = (*it1)->getSp()->getContentSize();
 		auto bpoint = (*it1)->getPosition();
-		log("%.2f %.2f", bpoint.x, bpoint.y);
-		switch ((int)((*it1)->getSp()->getRotation())){
-		case 0:x = bpoint.x, y = bpoint.y + bsize.height;
-		log("itp  {%.2f, %.2f}", bpoint.x, bpoint.y);
-		log("{%.2f, %.2f}", x, y);break;
-		case 90:x = bpoint.x + bsize.width, y = bpoint.y;
-		log("itp  {%.2f, %.2f}", bpoint.x, bpoint.y);
-		log("{%.2f, %.2f}", x, y);break;
-		case 180:x = bpoint.x, y = bpoint.y - bsize.height;
-		log("itp  {%.2f, %.2f}", bpoint.x, bpoint.y);
-		log("{%.2f, %.2f}", x, y);break;
-		case 270:x = bpoint.x - bsize.width, y = bpoint.y;
-		log("itp  {%.2f, %.2f}", bpoint.x, bpoint.y);
-		log("{%.2f, %.2f}", x, y);break;
-		default:
-		break;
-		}
-		x = x / 16;
-		y = 40 - y / 16;
-		if (x > 59){
-		x = 59;
-		}
-		if (y > 39){
-		y = 39;
-		}
-		if (x < 0){
-		x = 0;
-		}
-		if (y < 0){
-		y = 0;
-		}
-		(*it1)->stopAllActions();
+		auto bsize = (*it1)->getBulletSize();
+		auto maphigth = bg->getLayerSize().height;
+		auto px1 = 0;
+		auto px2 = 0;
+		auto px3 = 0;
 
-		if (map->m_bg->getTileGIDAt(Vec2(x, y))){
-		BulletsBox::getInstance()->deleteBullet((*it1));
-		(*it1)->deleteBullet();
-		it1 ++;
-		continue;
-
-		}*/
+		auto py1 = 0;
+		auto py2 = 0;
+		auto py3 = 0;
+		auto r = (*it1)->getRotation();
+		static int a = 0;
+		static int b = 0;
+		static int c = 0;
+		if (r == 0.0f){
+			py1 = maphigth - (bpoint.y + bsize.height)/16;
+			px1	= bpoint.x/16;
+			px2 = (bpoint.x + bsize.width/2)/16;
+			px3 = (bpoint.x - bsize.width/2)/16;
+			if(py1 < 0.0f) py1 = 0.0f;
+			if(px2 > 59.0f) px2 = 59.0f;
+			if(px3 < 0.0f) px3 = 0.0f;
+			if (bg->getTileGIDAt(Vec2(px1,py1))){
+				bg->removeTileAt(Vec2(px1,py1));
+				a = 1;
+			}
+			if (bg->getTileGIDAt(Vec2(px2,py1))){
+				bg->removeTileAt(Vec2(px2,py1));
+				a = 1;
+			}
+			if (bg->getTileGIDAt(Vec2(px3,py1))){
+				bg->removeTileAt(Vec2(px3,py1));
+				a = 1;
+			}
+			if (iron->getTileGIDAt(Vec2(px1,py1))){
+				a = 1;
+			}
+			if (iron->getTileGIDAt(Vec2(px2,py1))){
+				a = 1;
+			}
+			if (iron->getTileGIDAt(Vec2(px3,py1))){
+				a = 1;
+			}
+			if(a == 1){
+				a = 0;
+				BulletsBox::getInstance()->deleteBullet((*it1));
+				(*it1)->doDead();
+				it1 ++;
+				continue;
+			}
+			if (bird->getTileGIDAt(Vec2(px1,py1))){
+				BulletsBox::getInstance()->deleteBullet((*it1));
+				(*it1)->doDead();
+				it1 ++;
+				continue;
+				//游戏结束
+			}
+			if (bird->getTileGIDAt(Vec2(px2,py1))){
+				BulletsBox::getInstance()->deleteBullet((*it1));
+				(*it1)->doDead();
+				it1 ++;
+				continue;
+				//游戏结束
+			}
+			if (bird->getTileGIDAt(Vec2(px3,py1))){
+				BulletsBox::getInstance()->deleteBullet((*it1));
+				(*it1)->doDead();
+				it1 ++;
+				continue;
+				//游戏结束
+			}
+		}else if (r == 90.0f){
+			px1 = (bpoint.x + bsize.width/2)/16;
+			py1 = maphigth - bpoint.y/16;
+			py2 = maphigth - (bpoint.y + bsize.width/2)/16;
+			py3 = maphigth - (bpoint.y - bsize.width/2)/16;
+			if(px1 > 59.0f) px1 = 59.0f;
+			if(py2 > 39.0f) py2 = 39.0f;
+			if(py3 < 0.0f) py3 = 0.0f;
+			if (bg->getTileGIDAt(Vec2(px1,py1))){
+				bg->removeTileAt(Vec2(px1,py1));
+				a = 1;
+			}
+			if (bg->getTileGIDAt(Vec2(px1,py2))){
+				bg->removeTileAt(Vec2(px1,py2));
+				a = 1;
+			}
+			if (bg->getTileGIDAt(Vec2(px1,py3))){
+				bg->removeTileAt(Vec2(px1,py3));
+				a = 1;
+			}
+			if (iron->getTileGIDAt(Vec2(px1,py1))){
+				a = 1;
+			}
+			if (iron->getTileGIDAt(Vec2(px1,py2))){
+				a = 1;
+			}
+			if (iron->getTileGIDAt(Vec2(px1,py3))){
+				a = 1;
+			}
+			if(a == 1){
+				a = 0;
+				BulletsBox::getInstance()->deleteBullet((*it1));
+				(*it1)->doDead();
+				it1 ++;
+				continue;
+			}
+			if (bird->getTileGIDAt(Vec2(px1,py1))){
+				BulletsBox::getInstance()->deleteBullet((*it1));
+				(*it1)->doDead();
+				it1 ++;
+				continue;
+				//游戏结束
+			}
+			if (bird->getTileGIDAt(Vec2(px1,py2))){
+				BulletsBox::getInstance()->deleteBullet((*it1));
+				(*it1)->doDead();
+				it1 ++;
+				continue;
+				//游戏结束
+			}
+			if (bird->getTileGIDAt(Vec2(px1,py3))){
+				BulletsBox::getInstance()->deleteBullet((*it1));
+				(*it1)->doDead();
+				it1 ++;
+				continue;
+				//游戏结束
+			}
+		}else if (r == 180.0f){
+			py1 = maphigth - (bpoint.y - bsize.height)/16;
+			px1	= bpoint.x/16;
+			px2 = (bpoint.x + bsize.width/2)/16;
+			px3 = (bpoint.x - bsize.width/2)/16;
+			if(py1 > 39.0f) py1 = 39.0f;
+			if(px2 > 59.0f) px2 = 59.0f;
+			if(px3 < 0.0f) px3 = 0.0f;
+			if (bg->getTileGIDAt(Vec2(px1,py1))){
+				bg->removeTileAt(Vec2(px1,py1));
+				a = 1;
+			}
+			if (bg->getTileGIDAt(Vec2(px2,py1))){
+				bg->removeTileAt(Vec2(px2,py1));
+				a = 1;
+			}
+			if (bg->getTileGIDAt(Vec2(px3,py1))){
+				bg->removeTileAt(Vec2(px3,py1));
+				a = 1;
+			}
+			if (iron->getTileGIDAt(Vec2(px1,py1))){
+				a = 1;
+			}
+			if (iron->getTileGIDAt(Vec2(px2,py1))){
+				a = 1;
+			}
+			if (iron->getTileGIDAt(Vec2(px3,py1))){
+				a = 1;
+			}
+			if(a == 1){
+				a = 0;
+				BulletsBox::getInstance()->deleteBullet((*it1));
+				(*it1)->doDead();
+				it1 ++;
+				continue;
+			}
+			if (bird->getTileGIDAt(Vec2(px1,py1))){
+				BulletsBox::getInstance()->deleteBullet((*it1));
+				(*it1)->doDead();
+				it1 ++;
+				continue;
+				//游戏结束
+			}
+			if (bird->getTileGIDAt(Vec2(px2,py1))){
+				BulletsBox::getInstance()->deleteBullet((*it1));
+				(*it1)->doDead();
+				it1 ++;
+				continue;
+				//游戏结束
+			}
+			if (bird->getTileGIDAt(Vec2(px3,py1))){
+				BulletsBox::getInstance()->deleteBullet((*it1));
+				(*it1)->doDead();
+				it1 ++;
+				continue;
+				//游戏结束
+			}
+		}else if (r == 270.0f){
+			px1 = (bpoint.x - bsize.width/2)/16;
+			py1 = maphigth - bpoint.y/16;
+			py2 = maphigth - (bpoint.y + bsize.width/2)/16;
+			py3 = maphigth - (bpoint.y - bsize.width/2)/16;
+			if(px1 < 0.0f) px1 = 0.0f;
+			if(py2 > 39.0f) py2 = 39.0f;
+			if(py3 < 0.0f) py3 = 0.0f;
+			if (bg->getTileGIDAt(Vec2(px1,py1))){
+				bg->removeTileAt(Vec2(px1,py1));
+				a = 1;
+			}
+			if (bg->getTileGIDAt(Vec2(px1,py2))){
+				bg->removeTileAt(Vec2(px1,py2));
+				a = 1;
+			}
+			if (bg->getTileGIDAt(Vec2(px1,py3))){
+				bg->removeTileAt(Vec2(px1,py3));
+				a = 1;
+			}
+			if (iron->getTileGIDAt(Vec2(px1,py1))){
+				a = 1;
+			}
+			if (iron->getTileGIDAt(Vec2(px1,py2))){
+				a = 1;
+			}
+			if (iron->getTileGIDAt(Vec2(px1,py3))){
+				a = 1;
+			}
+			if(a == 1){
+				a = 0;
+				BulletsBox::getInstance()->deleteBullet((*it1));
+				(*it1)->doDead();
+				it1 ++;
+				continue;
+			}
+			if (bird->getTileGIDAt(Vec2(px1,py1))){
+				BulletsBox::getInstance()->deleteBullet((*it1));
+				(*it1)->doDead();
+				it1 ++;
+				continue;
+				//游戏结束
+			}
+			if (bird->getTileGIDAt(Vec2(px1,py2))){
+				BulletsBox::getInstance()->deleteBullet((*it1));
+				(*it1)->doDead();
+				it1 ++;
+				continue;
+				//游戏结束
+			}
+			if (bird->getTileGIDAt(Vec2(px1,py3))){
+				BulletsBox::getInstance()->deleteBullet((*it1));
+				(*it1)->doDead();
+				it1 ++;
+				continue;
+				//游戏结束
+			}
+		}
 		if (!(*it1) || !tan){
 			return;
 		}

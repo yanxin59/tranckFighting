@@ -48,7 +48,7 @@ Rect tanks::getBoundingBox()
 {
     auto tCurPos = getPosition();//当前的位置
     auto tSize = _pTank->getContentSize();//坦克的尺寸
-    return Rect(tCurPos.x, tCurPos.y, tSize.width, tSize.height);//返回一个矩形,当前位置和坦克尺寸
+    return Rect(tCurPos.x - tSize.width / 2, tCurPos.y - tSize.height / 2, tSize.width, tSize.height);//返回一个矩形,当前位置和坦克尺寸
 }
 
 void tanks::up(){

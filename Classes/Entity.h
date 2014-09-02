@@ -17,6 +17,8 @@ class Entity:public Node
 {
 public:
     
+    Entity();
+    
     virtual void doDead();
     
     virtual ~Entity();

@@ -8,6 +8,8 @@
 
 #include "Entity.h"
 
+Entity::Entity():_pSprite(nullptr)
+{}
 
 Entity::~Entity()
 {

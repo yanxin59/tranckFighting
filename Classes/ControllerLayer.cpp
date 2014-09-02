@@ -16,7 +16,8 @@ bool ControllerLayer::init(){
         return false;
     }
     
-    
+    _iLeft = 0;
+    _iUp = 0;
     auto tControl = Sprite::create("control_bg.png");
     tControl->setPosition(Vec2(tControl->getContentSize().width/2,tControl->getContentSize().height/2));
     this->addChild(tControl,1);
