@@ -29,7 +29,7 @@ bool ControllerLayer::init(){
     tHandle->setOpacity(200);
     
     tanks * tank = tanks::getInstance();
-    this->addChild(tank);
+    
     
     auto listen = EventListenerTouchOneByOne::create();
     listen->onTouchBegan = [=]( Touch * t , Event * e){
@@ -131,7 +131,6 @@ bool ControllerLayer::init(){
     MenuItemImage * item = MenuItemImage::create("fire_button_default.png","fire_button_press.png",[=](Ref * sender){
  
         tank->addFire();
-        
     });
     
     item->setPosition(Vec2(Director::getInstance()->getVisibleSize().width - (tControl->getContentSize().width/2),tControl->getContentSize().height/2));
@@ -145,8 +144,6 @@ bool ControllerLayer::init(){
     tControlFireButton->setPosition(Vec2(Director::getInstance()->getVisibleSize().width - (tControl->getContentSize().width/2),tControl->getContentSize().height/2));
     this->addChild(tControlFireButton);
     scheduleUpdate();
-    
-
     
     return true;
 }
