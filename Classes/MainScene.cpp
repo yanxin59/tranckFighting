@@ -8,6 +8,8 @@
 
 #include "MainScene.h"
 #include "GameScene.h"
+#include <SimpleAudioEngine.h>
+using namespace CocosDenshion;
 bool MainScene::init(){
     
     if (!Scene::init()) {
@@ -34,7 +36,7 @@ bool MainScene::init(){
     auto act = JumpBy::create(3, Vec2(0,0), 50, 2);
     item->runAction(act);
     
-    
+    SimpleAudioEngine::getInstance()->playEffect("startSound.wav");
     
     return true;
 }

@@ -5,6 +5,8 @@
 #include "BulletLayer.h"
 #include "GameScene.h"
 #include "Map.h"
+#include "SimpleAudioEngine.h"
+using namespace CocosDenshion;
 bool Enemy::init(){
 	if(!Node::init()){
 		return false;
@@ -34,6 +36,7 @@ void Enemy::addFire(float t){
 	auto b = Bullet::create((float)jd, p, mark);
 	auto s = dynamic_cast<GameScene*>(Director::getInstance()->getRunningScene());
     s->getLayer()->addBullet(b);
+    SimpleAudioEngine::getInstance()->playEffect("bullet.aif");
 }
 bool Enemy::hurt(int attackValue){
 	HP -= attackValue;
@@ -60,6 +63,9 @@ int Enemy::makeTurn(){
 	return this->jd;
 }
 void Enemy::move(float t){
+    
+    SimpleAudioEngine::getInstance()->playEffect("move.aif");
+    
 	int key = 1;
 
 	Size size = Director::getInstance()->getVisibleSize();                       //·ÀÖ¹ÒÆ³öÆÁÄ»²Ù×÷

@@ -11,6 +11,8 @@
 #include "BulletLayer.h"
 #include "Map.h"
 #include "ControllerLayer.h"
+#include "SimpleAudioEngine.h"
+using namespace CocosDenshion;
 
 bool GameScene::init(){
 	if (!Scene::init()){
@@ -30,6 +32,8 @@ bool GameScene::init(){
 	auto l = BulletLayer::create();
     l->setTag(1);
 	this->addChild(l);
+    
+    SimpleAudioEngine::getInstance()->playEffect("startSound.wav");
 	
 	return true;
 }

@@ -11,7 +11,9 @@
 #include "Map.h"
 #include "Bullet.h"
 #include "BulletLayer.h"
-
+#include <SimpleAudioEngine.h>
+#include "stopScene.h"
+using namespace CocosDenshion;
 tanks * tanks::instance = nullptr;
 tanks * tanks::getInstance()
 {
@@ -34,6 +36,8 @@ void tanks::addFire(){
     
     layer->addBullet(bu);//把子弹加到子弹层
     
+    SimpleAudioEngine::getInstance()->playEffect("bullet.aif");
+    
     //点击按钮,开火
 }
 
@@ -41,10 +45,19 @@ void tanks::mineTankDie(){
  
     playAnimation();
     
+    auto scene = stopScene::create();
+    
+    Director::getInstance()->replaceScene(scene);
+    
 }
 void tanks::playAnimation(){
     
+    SimpleAudioEngine::getInstance()->playEffect("tankbomb.aif");
     
+    
+    
+    
+    SimpleAudioEngine::getInstance()->playEffect("gameover.aif");
 }
 Rect tanks::getBoundingBox()
 {
@@ -56,6 +69,8 @@ Rect tanks::getBoundingBox()
 void tanks::up(){
     
     _pTank->setRotation(0);//角度为0,方向朝上
+    
+    SimpleAudioEngine::getInstance()->playEffect("move.aif");
     
     if(judge())//如果前方有障碍物,停止向前
         return ;
@@ -72,6 +87,8 @@ void tanks::up(){
 
 void tanks::down(){
     _pTank->setRotation(180);
+    
+     SimpleAudioEngine::getInstance()->playEffect("move.aif");
     if(judge())
         return ;
 
@@ -85,6 +102,8 @@ void tanks::down(){
 void tanks::left(){
  
     _pTank->setRotation(270);
+    
+     SimpleAudioEngine::getInstance()->playEffect("move.aif");
     if(judge())
         return ;
 
@@ -98,6 +117,8 @@ void tanks::left(){
 void tanks::right(){
 
     _pTank->setRotation(90);
+    
+     SimpleAudioEngine::getInstance()->playEffect("move.aif");
     if(judge())
         return ;
     setPositionX(getPositionX()+1);
