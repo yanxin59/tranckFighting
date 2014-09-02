@@ -14,7 +14,7 @@ bool BigTank::hurt(int attackValue){
 		sp->setTexture("green.png");
 		sp->setRotation(jd);
 	}else if(HP == 400){
-		sp->setTexture("yellow.png.png");
+		sp->setTexture("yellow.png");
 		sp->setRotation(jd);
 	}else if(HP == 200){
 		sp->setTexture("white.png");
