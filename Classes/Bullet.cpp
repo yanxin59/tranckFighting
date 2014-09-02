@@ -9,14 +9,19 @@ bool Bullet::init(float r, Vec2 v){
 	setEntityType(0);
 	//设置速度
 	setISpeed(300);
+
+	//_pSprite = nullptr;
 	//创建精灵
 	setbindSprite(Sprite::create("bullet.png"));
+	getbindSprite()->setScale(0.5);
+	buletsize = getbindSprite()->getContentSize()/2;
+	this->addChild(getbindSprite());
 	//攻击力
 	this->attack = BULLETATTACK;
 	//根据坦克角度旋转子弹
 	this->setRotation(r);
-	//将子弹初始位置置为坦克位置 + 2个子弹长度，为了看着是从炮口出来
-	auto ss = getbindSprite()->getContentSize()*2;
+	//将子弹初始位置置为坦克位置
+	auto ss = buletsize;
 	auto maxs = ss.width > ss.height ? ss.width:ss.height;
 	switch ((int)r){
 	case 0:ss.width = 0;ss.height = maxs;break;
@@ -33,7 +38,7 @@ bool Bullet::init(float r, Vec2 v){
 	//移动
 	move();
 	//添加
-	this->addChild(getbindSprite());
+	
 	return true;
 }
 
@@ -72,7 +77,7 @@ void Bullet::move(){
 	//得到位置
 	float positionBullet = 0;
 	//根据角度， 位置改变移动方向，距离
-	auto bs = this->getContentSize();
+	auto bs = buletsize;
 	auto maxs = bs.width > bs.height ? bs.width:bs.height;
 	switch ((int)(this->getRotation())){
 		
