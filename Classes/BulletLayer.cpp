@@ -50,11 +50,7 @@ void BulletLayer::update(float t){
 	cocos2d::TMXLayer *iron = map->m_iron;
 	auto tan = tanks::getInstance();
 	
-	//log("%d", v.size());
 	static int a = 0;
-	static int b = 0;
-	Vec2 pit1;
-	Vec2 pit2;
 	for (auto it1 = v.begin(); it1 != v.end();){
 		auto bpoint = (*it1)->getPosition();
 		auto bsize = (*it1)->getBulletSize();
@@ -68,8 +64,10 @@ void BulletLayer::update(float t){
 		auto py3 = 0;
 		auto r = (*it1)->getRotation();
 		static int a = 0;
+		static int b = 0;
+		static int c = 0;
 		if (r == 0.0f){
-			py1 = maphigth - (bpoint.y + bsize.height + 8)/16;
+			py1 = maphigth - (bpoint.y + bsize.height)/16;
 			px1	= bpoint.x/16;
 			px2 = (bpoint.x + bsize.width/2)/16;
 			px3 = (bpoint.x - bsize.width/2)/16;
@@ -126,7 +124,7 @@ void BulletLayer::update(float t){
 				//游戏结束
 			}
 		}else if (r == 90.0f){
-			px1 = (bpoint.x + bsize.width/2 + 8)/16;
+			px1 = (bpoint.x + bsize.width/2)/16;
 			py1 = maphigth - bpoint.y/16;
 			py2 = maphigth - (bpoint.y + bsize.width/2)/16;
 			py3 = maphigth - (bpoint.y - bsize.width/2)/16;
@@ -183,7 +181,7 @@ void BulletLayer::update(float t){
 				//游戏结束
 			}
 		}else if (r == 180.0f){
-			py1 = maphigth - (bpoint.y - bsize.height - 8)/16;
+			py1 = maphigth - (bpoint.y - bsize.height)/16;
 			px1	= bpoint.x/16;
 			px2 = (bpoint.x + bsize.width/2)/16;
 			px3 = (bpoint.x - bsize.width/2)/16;
@@ -240,7 +238,7 @@ void BulletLayer::update(float t){
 				//游戏结束
 			}
 		}else if (r == 270.0f){
-			px1 = (bpoint.x - bsize.width/2 - 8)/16;
+			px1 = (bpoint.x - bsize.width/2)/16;
 			py1 = maphigth - bpoint.y/16;
 			py2 = maphigth - (bpoint.y + bsize.width/2)/16;
 			py3 = maphigth - (bpoint.y - bsize.width/2)/16;
