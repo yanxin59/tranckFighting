@@ -8,6 +8,7 @@
 
 #include "ControllerLayer.h"
 #include "tanks.h"
+
 bool ControllerLayer::init(){
     
     if (!Layer::init()) {
@@ -129,6 +130,7 @@ bool ControllerLayer::init(){
     MenuItemImage * item = MenuItemImage::create("fire_button_default.png","fire_button_press.png",[=](Ref * sender){
  
         tank->addFire();
+        
     });
     
     item->setPosition(Vec2(Director::getInstance()->getVisibleSize().width - (tControl->getContentSize().width/2),tControl->getContentSize().height/2));
@@ -142,6 +144,8 @@ bool ControllerLayer::init(){
     tControlFireButton->setPosition(Vec2(Director::getInstance()->getVisibleSize().width - (tControl->getContentSize().width/2),tControl->getContentSize().height/2));
     this->addChild(tControlFireButton);
     scheduleUpdate();
+    
+
     
     return true;
 }

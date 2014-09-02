@@ -21,27 +21,22 @@ private:
     {
         
         _pTank = Sprite::create("p1-a-cell.png");
-        _pTank->setAnchorPoint(Vec2(0, 0));
+//        _pTank->setAnchorPoint(Vec2(0, 0));
         this->addChild(_pTank);
     }
     
     tanks(const tanks & anotherTank){}//拷贝构造函数:防止单例被构造另一个
-    
-    tanks operator = (const tanks & anotherTank)
-    {
+    tanks operator = (const tanks & anotherTank){
         
         return anotherTank;
     }//等号运算符重载:防止单例被复制另一个
 protected:
 
-    Sprite * _pTank;
+    Sprite * _pTank;//成员变量只为了加入图片
     static tanks * instance;
     CREATE_FUNC(tanks);
-    
     Vec2 position;
-  
     virtual void mineTankDie();//主坦克死亡
-    
     virtual bool judge();//判断前方是否有障碍物
     int rotation;
 public:
@@ -53,9 +48,4 @@ public:
     virtual void right();//坦克向右移动方法
     virtual Rect getBoundingBox();
 };
-
-
-
-
-
 #endif /* defined(__tranckFighting__tanks__) */

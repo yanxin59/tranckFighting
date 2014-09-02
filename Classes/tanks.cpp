@@ -9,12 +9,12 @@
 #include "tanks.h"
 #include "GameScene.h"
 #include "Map.h"
+#include "Bullet.h"
+#include "BulletLayer.h"
 
 tanks * tanks::instance = nullptr;
-
 tanks * tanks::getInstance()
 {
-    
     if (!instance) {
         instance = tanks::create();
         instance->setPosition(100, 50);
@@ -22,15 +22,23 @@ tanks * tanks::getInstance()
     }
      return instance;
 }
-
-
 void tanks::addFire(){
     
-    _pTank->setPosition(_pTank->getPosition());
-    _pTank->setRotation(_pTank->getRotation());
+    auto bu = Bullet::create(_pTank->getRotation(), getPosition(), 1);//创建子弹
+    
+    auto gamescene  =  dynamic_cast<GameScene *>(Director::getInstance()->getRunningScene());//通过导演得到运行中的场景
+    
+ 
+    auto layer = gamescene->getLayer();//通过运行的场景得到子弹层
+    
+    
+    layer->addBullet(bu);//把子弹加到子弹层
+    
+    //点击按钮,开火
 }
 
 void tanks::mineTankDie(){
+    
     
     
     
@@ -57,7 +65,6 @@ void tanks::up(){
         setPositionY(s.height - tSize.height/2);
     }//如果坦克要出了上边界,就让它停留在上边界
 
-        setPositionY(s.height - tSize.height/2);
 
 }
 
@@ -102,6 +109,91 @@ void tanks::right(){
 
 bool tanks::judge()
 {
+    
+    auto tBg = (dynamic_cast<GameScene *>(Director::getInstance()->getRunningScene()))->getMap()->m_bg;
+    
+    auto tRotate = _pTank->getRotation();
+    
+    auto tTankwidth = _pTank->getContentSize().width / 2;
+    
+    auto tBgheight = tBg->getLayerSize().height;
+    
+    auto px1 = 0;
+    auto px2 = 0;
+    auto px3 = 0;
+    
+    auto py1 = 0;
+    auto py2 = 0;
+    auto py3 = 0;
+    
+    if(tRotate == 0.0f)
+    {
+        py1 = tBgheight - (getPositionY() + tTankwidth + 8) / 16;
+        px1 = getPositionX() / 16;
+        px2 = (getPositionX() + tTankwidth / 2) / 16;
+        px3 = (getPositionX() - tTankwidth / 2) / 16;
+        
+        
+        if(tBg->getTileGIDAt(Vec2(px1, py1)) || tBg->getTileGIDAt(Vec2(px2, py1)) || tBg->getTileGIDAt(Vec2(px3, py1)))
+        {
+            return true;
+        }
+    }
+    
+    if(tRotate == 90.0f)
+    {
+        px1 = (getPositionX() + tTankwidth + 8) / 16;
+        py1 = tBgheight - getPositionY() / 16;
+        py2 = tBgheight - (getPositionY() - tTankwidth / 2) / 16;
+        py3 = tBgheight - (getPositionY() + tTankwidth / 2) / 16;
+        if(px1 > 39.0f) px1 = 39.0f;
+        if(py2 > 59.0f) py2 = 59.0f;
+        if(py3 < 0.0f) py3 = 0.0f;
+        if(tBg->getTileGIDAt(Vec2(px1, py2)) || tBg->getTileGIDAt(Vec2(px1, py1)) || tBg->getTileGIDAt(Vec2(px1, py3)))
+        {
+            return true;
+        }
+        
+    }
+    
+    if(tRotate == 180.0f)
+    {
+        py1 = tBgheight - (getPositionY() - tTankwidth - 8) / 16;
+        px1 = getPositionX() / 16;
+        px2 = (getPositionX() - tTankwidth / 2) / 16;
+        px3 = (getPositionX() + tTankwidth / 2) / 16;
+        
+        if(py1 > 39.0f) py1 = 39.0f;
+        if(px3 < 0.0f) px3 = 0.0f;
+        if(px2 > 59.0f) px2 = 59.0f;
+        
+        
+        if(tBg->getTileGIDAt(Vec2(px1, py1)) || tBg->getTileGIDAt(Vec2(px2, py1)) || tBg->getTileGIDAt(Vec2(px3, py1)))
+        {
+            return true;
+        }
+    }
+    
+    if(tRotate == 270.0f)
+    {
+        px1 = (getPositionX() - tTankwidth - 8) / 16;
+        py1 = tBgheight - getPositionY() / 16;
+        py2 = tBgheight - (getPositionY() - tTankwidth / 2) / 16;
+        py3 = tBgheight - (getPositionY() + tTankwidth / 2) / 16;
+        
+        if(px1 < 0.0f) px1 = 0.0f;
+        if(py2 > 59.0f) py2 = 59.0f;
+        if(py3 < 0.0f) py3 = 0.0f;
+        
+        if(tBg->getTileGIDAt(Vec2(px1, py2)) || tBg->getTileGIDAt(Vec2(px1, py1)) || tBg->getTileGIDAt(Vec2(px1, py3)))
+        {
+            return true;
+        }
+    }
+    
+    return false;
+    
+    /*
     auto tBg = (dynamic_cast<GameScene *>(Director::getInstance()->getRunningScene()))->getMap()->m_bg;//砖块障碍物
     
     auto tRotate = _pTank->getRotation();//坦克的角度
@@ -228,9 +320,9 @@ bool tanks::judge()
     {
         return true;
     }
-
+*/
     
-    return false;
+//    return false;
 }
 
 
