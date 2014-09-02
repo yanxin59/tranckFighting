@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 #ifndef __BIGTANK
 #define __BIGTANK
 #include "cocos2d.h"
@@ -12,6 +12,4 @@ public:
 	CREATE_FUNC(BigTank);
 };
 #endif
-=======
-test
->>>>>>> 6d920466cd667900a7e9a6c8e3e484d2f26abf81
+

@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 #include "BigTank.h"
 bool BigTank::init(){
 	if(!Enemy::init()){
@@ -25,6 +25,4 @@ bool BigTank::hurt(int attackValue){
 	}
 	return false;
 }
-=======
-test
->>>>>>> 6d920466cd667900a7e9a6c8e3e484d2f26abf81
+
