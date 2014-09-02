@@ -29,7 +29,7 @@ bool ControllerLayer::init(){
     tHandle->setOpacity(200);
     
     tanks * tank = tanks::getInstance();
-    this->addChild(tank);
+    
     
     auto listen = EventListenerTouchOneByOne::create();
     listen->onTouchBegan = [=]( Touch * t , Event * e){

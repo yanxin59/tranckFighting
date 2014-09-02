@@ -38,12 +38,14 @@ void tanks::addFire(){
 }
 
 void tanks::mineTankDie(){
+ 
+    playAnimation();
     
-    
+}
+void tanks::playAnimation(){
     
     
 }
-
 Rect tanks::getBoundingBox()
 {
     auto tCurPos = getPosition();//当前的位置

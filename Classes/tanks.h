@@ -21,7 +21,6 @@ private:
     {
         
         _pTank = Sprite::create("p1-a-cell.png");
-//        _pTank->setAnchorPoint(Vec2(0, 0));
         this->addChild(_pTank);
     }
     
@@ -47,5 +46,7 @@ public:
     virtual void left();//坦克向左移动方法
     virtual void right();//坦克向右移动方法
     virtual Rect getBoundingBox();
+    virtual void playAnimation();
+    
 };
 #endif /* defined(__tranckFighting__tanks__) */
