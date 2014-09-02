@@ -15,3 +15,8 @@ bool Maps::init(){
 	m_bird->retain();
 	return true;
 }
+Point Maps::getGID(Vec2 ver){
+	int x = ver.x / m_Map->getTileSize().width;
+	int y = ((m_Map->getMapSize().height * m_Map->getTileSize().height) - ver.y) / m_Map->getTileSize().height;
+	return Point(x, y);
+}

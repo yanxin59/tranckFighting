@@ -10,5 +10,6 @@ public:
 	cocos2d::TMXLayer *m_bird;
 	cocos2d::TMXLayer *m_iron;
 	CREATE_FUNC(Maps);
+	Point getGID(Vec2 ver);
 };
 #endif
