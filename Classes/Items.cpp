@@ -8,12 +8,13 @@ bool Items::init(){
 	if (!Node::init()){
 		return false;
 	}
-	auto i = rand()%2 + 1;
+	auto i = rand()%3 + 1;
 	const char* filename;
 	switch (i)
 	{
-	case 1:filename = "star.png";itemsstate = 1;break;
-	case 2:filename = "timer.png";itemsstate = 2;break;
+	case 1:filename = "bomb.png";itemsstate = 1;break;
+	case 2:filename = "star.png";itemsstate = 2;break;
+	case 3:filename = "timer.png";itemsstate = 3;break;
 	default:
 		break;
 	}
@@ -38,8 +39,9 @@ void Items::update(float t){
 	if(this->itemsBox.intersectsRect(tanks::getInstance()->getBoundingBox())){
 		switch (itemsstate)
 		{
-		case 1:EnemyVector::getInstence()->reset();log("yixing");break;
-		case 2:log("tingzhi");break;
+		case 1:EnemyVector::getInstence()->reset();break;
+		case 2:break;
+		case 3:break;
 		default:
 			break;
 		}
