@@ -22,15 +22,15 @@ tanks * tanks::getInstance()
 {
     if (!instance) {
         instance = tanks::create();
-        
     }
     return instance;
 }
 
 tanks::tanks()
 {
-    _pTank = Sprite::create("p1-a-cell.png");
-    this->addChild(_pTank);
+    setbindSprite(Sprite::create("p1-a-cell.png"));
+    this->addChild(getbindSprite());
+    _tankSize = getbindSprite()->getContentSize();
 }
 
 void tanks::addFire(){
@@ -48,26 +48,26 @@ void tanks::addFire(){
     //点击按钮,开火
 }
 
-void tanks::mineTankDie(){
+void tanks::doDead(){
  
-    playAnimation();
+    doAction();
     
     auto scene = stopScene::create();
     
     Director::getInstance()->replaceScene(scene);
     
 }
-void tanks::playAnimation(){
+void tanks::doAction(){
     
     SimpleAudioEngine::getInstance()->playEffect("tankbomb.aif");
     
     SimpleAudioEngine::getInstance()->playEffect("gameover.aif");
 }
+
 Rect tanks::getBoundingBox()
 {
     auto tCurPos = getPosition();//当前的位置
-    auto tSize = _pTank->getContentSize();//坦克的尺寸
-    return Rect(tCurPos.x - tSize.width / 2, tCurPos.y - tSize.height / 2, tSize.width, tSize.height);//返回一个矩形,当前位置和坦克尺寸
+    return Rect(tCurPos.x - _tankSize.width / 2, tCurPos.y - _tankSize.height / 2, _tankSize.width, _tankSize.height);//返回一个矩形,当前位置和坦克尺寸
 }
 
 void tanks::up(){
@@ -80,10 +80,10 @@ void tanks::up(){
     SimpleAudioEngine::getInstance()->playEffect("move.aif");
     setPositionY(getPositionY()+TANK_SPEED);//一步一步移动
     Size s = Director::getInstance()->getVisibleSize();//屏幕尺寸
-    Size tSize = _pTank->getContentSize();//坦克尺寸
-    if (getPositionY() >= (s.height - tSize.height/2)) {
-        
-        setPositionY(s.height - tSize.height/2);
+
+    if (getPositionY() >= (s.height - _tankSize.height/2))
+    {
+        setPositionY(s.height - _tankSize.height/2);
     }//如果坦克要出了上边界,就让它停留在上边界
 
 }
@@ -96,10 +96,9 @@ void tanks::down(){
         return ;
     SimpleAudioEngine::getInstance()->playEffect("move.aif");
     setPositionY(getPositionY()-TANK_SPEED);
-    Size  sSize = _pTank->getContentSize();
-    if (getPositionY() < sSize.height/2) {
+    if (getPositionY() < _tankSize.height/2) {
         
-        setPositionY(sSize.height/2);
+        setPositionY(_tankSize.height/2);
     }
 }
 void tanks::left(){
@@ -110,9 +109,8 @@ void tanks::left(){
         return ;
     SimpleAudioEngine::getInstance()->playEffect("move.aif");
     setPositionX(getPositionX()-TANK_SPEED);
-    Size sSize = _pTank->getContentSize();
-    if (getPositionX() < sSize.width/2) {
-        setPositionX(sSize.width/2);
+    if (getPositionX() < _tankSize.width/2) {
+        setPositionX(_tankSize.width/2);
     }
 
 }
@@ -125,9 +123,8 @@ void tanks::right(){
     SimpleAudioEngine::getInstance()->playEffect("move.aif");
     setPositionX(getPositionX()+TANK_SPEED);
     Size s = Director::getInstance()->getVisibleSize();
-    Size sSize = _pTank->getContentSize();
-    if (getPositionX() >= (s.width-sSize.width/2 )) {
-        setPositionX(s.width-sSize.width/2);
+    if (getPositionX() >= (s.width-_tankSize.width/2 )) {
+        setPositionX(s.width-_tankSize.width/2);
     }
 }
 
@@ -201,4 +198,9 @@ bool tanks::judge()
     
 }
 
+
+void tanks::move()
+{
+
+}
 
