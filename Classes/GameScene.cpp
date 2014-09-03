@@ -20,21 +20,21 @@ bool GameScene::init(){
 	if (!Scene::init()){
 		return false;
 	}
-	Maps * map = Maps::create();
-	map->setName("map");
-	this->addChild(map);
+	Maps * tPMap = Maps::create();
+	tPMap->setName("map");
+	this->addChild(tPMap);
 
-	auto elayer = EnemyLayer::create();
-	elayer->setAnchorPoint(Point::ZERO);
-	elayer->setPosition(Point::ZERO);
-	this->addChild(elayer);
+	auto tPEnemyLayer = EnemyLayer::create();
+	tPEnemyLayer->setAnchorPoint(Point::ZERO);
+	tPEnemyLayer->setPosition(Point::ZERO);
+	this->addChild(tPEnemyLayer);
 
-	auto layer = ControllerLayer::create();
-    this->addChild(layer);
+	auto tPControllerLayer = ControllerLayer::create();
+    this->addChild(tPControllerLayer);
     
-	auto l = BulletLayer::create();
-    l->setTag(1);
-	this->addChild(l);
+	auto tPBulletLayer = BulletLayer::create();
+    tPBulletLayer->setTag(1);
+	this->addChild(tPBulletLayer);
     
     auto tPScoreLayer = ScoreLayer::create();
     addChild(tPScoreLayer);

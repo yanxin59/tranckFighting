@@ -37,17 +37,27 @@ tanks::tanks()
 {
     setbindSprite(Sprite::create("p1-a-cell.png"));
     this->addChild(getbindSprite());
-    _tankSize = getbindSprite()->getContentSize();
     initTank();
 }
 
 void tanks::initTank()
 {
     setRotation(en_Up);
+    _tankSize = getbindSprite()->getContentSize();
+    _tankState = en_NormalState;
     _tankLifeCount = 3;
     auto map = TMXTiledMap::create("mapNewer.tmx");
     auto playerPosValueMap = map->getObjectGroup("object")->getObject("player");
-    setPosition(Vec2(playerPosValueMap.at("x").asFloat(), playerPosValueMap.at("y").asFloat()));
+    _tankInitPos = Vec2(playerPosValueMap.at("x").asFloat(), playerPosValueMap.at("y").asFloat());
+    setPosition(_tankInitPos);
+}
+
+void tanks::reset()
+{
+    setRotation(en_Up);
+    _tankState = en_NormalState;
+    _tankLifeCount = 3;
+    setPosition(_tankInitPos);
 }
 
 void tanks::addFire(){
@@ -65,10 +75,10 @@ void tanks::addFire(){
     //点击按钮,开火
 }
 
-void tanks::doDead(){
- 
+void tanks::doDead()
+{
+    setIsDead(true);
     doAction();
-    log("%d", _tankLifeCount);
     if(--_tankLifeCount == 0)
     {
         auto tSceneType = en_GameEndScene;
@@ -77,11 +87,15 @@ void tanks::doDead(){
 }
 void tanks::doAction()
 {
-//    auto map = TMXTiledMap::create("mapNewer.tmx");
-//    auto playerPosValueMap = map->getObjectGroup("object")->getObject("player");
-//    setPosition(Vec2(playerPosValueMap.at("x").asFloat(), playerPosValueMap.at("y").asFloat()));
-//    auto pBlink = Blink::create(2, 3);
-//    runAction(pBlink);
+    
+    auto pBlink = Blink::create(1, 2);
+    auto pCallFunc = CallFunc::create([this]()
+    {
+        this->setPosition(_tankInitPos);
+        this->setRotation(en_Up);
+        this->setIsDead(false);
+    });
+    runAction(Sequence::create(pBlink, pCallFunc, NULL));
 }
 
 Rect tanks::getBoundingBox()
@@ -92,12 +106,6 @@ Rect tanks::getBoundingBox()
 
 void tanks::up(){
     
-    setRotation(en_Up);//角度为0,方向朝上
-    
-    if(judge())//如果前方有障碍物,停止向前
-        return ;
-    
-    SimpleAudioEngine::getInstance()->playEffect("move.aif");
     setPositionY(getPositionY()+TANK_SPEED);//一步一步移动
     Size s = Director::getInstance()->getVisibleSize();//屏幕尺寸
 
@@ -108,35 +116,24 @@ void tanks::up(){
     //如果坦克要出了上边界,就让它停留在上边界
 }
 
-void tanks::down(){
-    setRotation(en_Down);
-    if(judge())
-        return ;
-    SimpleAudioEngine::getInstance()->playEffect("move.aif");
+void tanks::down()
+{
     setPositionY(getPositionY()-TANK_SPEED);
     if (getPositionY() < _tankSize.height/2) {
         
         setPositionY(_tankSize.height/2);
     }
 }
-void tanks::left(){
-    setRotation(en_Left);
-    if(judge())
-        return ;
-    SimpleAudioEngine::getInstance()->playEffect("move.aif");
+void tanks::left()
+{
     setPositionX(getPositionX()-TANK_SPEED);
     if (getPositionX() < _tankSize.width/2) {
         setPositionX(_tankSize.width/2);
     }
 
 }
-void tanks::right(){
-
-    setRotation(en_Right);
-
-    if(judge())
-        return ;
-    SimpleAudioEngine::getInstance()->playEffect("move.aif");
+void tanks::right()
+{
     setPositionX(getPositionX()+TANK_SPEED);
     Size s = Director::getInstance()->getVisibleSize();
     if (getPositionX() >= (s.width-_tankSize.width/2 )) {
@@ -146,6 +143,9 @@ void tanks::right(){
 
 void tanks::move(const Rotation &rRotation)
 {
+    setRotation(rRotation);
+    if(judge()) return;
+    SimpleAudioEngine::getInstance()->playEffect("move.aif");
     switch (rRotation) {
         case en_Up:
             up();

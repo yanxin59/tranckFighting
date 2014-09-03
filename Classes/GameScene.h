@@ -13,9 +13,14 @@
 
 
 using namespace cocos2d;
+
 class BulletLayer;
+
 class Maps;
-class GameScene:public Scene{
+
+class GameScene:public Scene
+{
+    
 public:
     virtual bool init();
 	CREATE_FUNC(GameScene);

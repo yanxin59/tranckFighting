@@ -9,9 +9,7 @@
 #ifndef __tranckFighting__Entity__
 #define __tranckFighting__Entity__
 
-#include "cocos2d.h"
-
-using namespace cocos2d;
+#include "config.h"
 
 class Entity:public Node
 {

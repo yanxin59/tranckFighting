@@ -9,7 +9,6 @@
 #ifndef __tranckFighting__stopScene__
 #define __tranckFighting__stopScene__
 
-#include <iostream>
 #include "cocos2d.h"
 using namespace cocos2d;
 
@@ -25,10 +24,6 @@ public:
     
     
 };
-
-
-
-
 
 
 #endif /* defined(__tranckFighting__stopScene__) */

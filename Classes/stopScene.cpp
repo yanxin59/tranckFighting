@@ -25,8 +25,6 @@ bool stopScene::init(){
     loseSp->setPosition(Vec2(480,320));
     loseSp->setScale(4.0, 4.0);
     
-
-    
     MenuItemImage * image = MenuItemImage::create("close.png","open.png",[=](Ref * sender){
         
         auto tSceneType = en_GameScene;
@@ -42,9 +40,6 @@ bool stopScene::init(){
     menu->setPosition(Vec2(0,0));
     this->addChild(menu);
     
-    
-    
-    
-       
+
     return true;
 }

@@ -47,6 +47,10 @@ private:
     
     int _tankLifeCount;
     
+    TankState _tankState;
+    
+    Vec2 _tankInitPos;
+    
 private:
     
     static tanks * instance;
@@ -67,6 +71,8 @@ protected:
     virtual void right();//坦克向右移动方法
     
     virtual void doAction();
+    
+    virtual void initTank();
 
 public:
     
@@ -74,7 +80,7 @@ public:
     
     static void delInstance();
     
-    virtual void initTank();
+    virtual void reset();
     
     virtual void addFire();//坦克开火(己放坦克打敌方坦克)
     

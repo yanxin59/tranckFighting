@@ -20,4 +20,12 @@ enum SceneTpye
     en_GameEndScene
 };
 
+enum TankState
+{
+    en_NormalState,
+    en_StopEnemyState,
+    en_BombEnemyState,
+    en_AddBulletSpeedState
+};
+
 #endif

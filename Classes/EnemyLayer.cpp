@@ -24,12 +24,8 @@ bool EnemyLayer::init(){
 	addChild(p_Tank);
 
 	tanks * main = tanks::getInstance();
+    main->reset();
 	addChild(main);
-    main->setRotation(en_Up);
-
-    auto map = TMXTiledMap::create("mapNew.tmx");
-    auto playerPosValueMap = map->getObjectGroup("object")->getObject("player");
-    main->setPosition(Vec2(playerPosValueMap.at("x").asFloat(), playerPosValueMap.at("y").asFloat()));
     
 	return true;
 }
