@@ -97,7 +97,7 @@ void BulletLayer::update(float t){
 				(*it1)->doDead();
 				it1 ++;
                 auto tSceneType = en_GameEndScene;
-//                NotificationCenter::getInstance()->postNotification("changeScene", reinterpret_cast<Ref*>(&tSceneType));
+                NotificationCenter::getInstance()->postNotification("changeScene", reinterpret_cast<Ref*>(&tSceneType));
 				continue;
 				//游戏结束
 			}
@@ -143,7 +143,7 @@ void BulletLayer::update(float t){
 				(*it1)->doDead();
 				it1 ++;
                 auto tSceneType = en_GameEndScene;
-//                NotificationCenter::getInstance()->postNotification("changeScene", reinterpret_cast<Ref*>(&tSceneType));
+                NotificationCenter::getInstance()->postNotification("changeScene", reinterpret_cast<Ref*>(&tSceneType));
 				continue;
 				//游戏结束
 			}
@@ -188,7 +188,7 @@ void BulletLayer::update(float t){
 				(*it1)->doDead();
 				it1 ++;
                 auto tSceneType = en_GameEndScene;
-//                NotificationCenter::getInstance()->postNotification("changeScene", reinterpret_cast<Ref*>(&tSceneType));
+                NotificationCenter::getInstance()->postNotification("changeScene", reinterpret_cast<Ref*>(&tSceneType));
 				continue;
 				//游戏结束
 			}
@@ -233,7 +233,7 @@ void BulletLayer::update(float t){
 				(*it1)->doDead();
 				it1 ++;
                 auto tSceneType = en_GameEndScene;
-//                NotificationCenter::getInstance()->postNotification("changeScene", reinterpret_cast<Ref*>(&tSceneType));
+                NotificationCenter::getInstance()->postNotification("changeScene", reinterpret_cast<Ref*>(&tSceneType));
 				continue;
 				//游戏结束
 			}

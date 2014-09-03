@@ -15,5 +15,6 @@ public:
 	void addEnemy(Enemy * bt);//¼ÓÌ¹¿Ë
 	void deleEnemy(Enemy * bt);//¼õÌ¹¿Ë
 	CC_SYNTHESIZE_READONLY_PASS_BY_REF(Vector<Enemy *>,enemyVector,EV);
+	void clearEnemy();
 };
 #endif

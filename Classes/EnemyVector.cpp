@@ -14,8 +14,11 @@ void EnemyVector::deleEnemy(Enemy * bt){
 	enemyVector.eraseObject(bt);
 }
 void EnemyVector::reset(){
-	while(!enemyVector.empty()){
-		Enemy * enemy = enemyVector.at(0);
-		enemy->hurt(10000);
+	for(int i = 0;i < 4;i++){
+		Enemy * enemy = enemyVector.at(i);
+		enemy->hurt(1000);
 	}
+}
+void EnemyVector::clearEnemy(){
+	enemyVector.clear();
 }
