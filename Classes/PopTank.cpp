@@ -13,7 +13,7 @@ bool PopTank::init(){
 	this->addPoint(Vec2(16*36,16*4));
     this->addPoint(Vec2(16*46,16*4));
 	count = 20;
-	schedule(schedule_selector(PopTank::mydate,this),1.5);
+	schedule(schedule_selector(PopTank::mydate),1.5);
 	return true;
 }
 void PopTank::addPoint(Vec2 vec){
