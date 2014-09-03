@@ -26,6 +26,7 @@ bool Items::init(){
 	this->scheduleUpdate();
 	auto s = dynamic_cast<GameScene*>(Director::getInstance()->getRunningScene());
 	s->getLayer()->addChild(this);
+	this->schedule(schedule_selector(Items::timedoDead, this), 10);
 	return true;
 }
 
@@ -44,6 +45,10 @@ void Items::update(float t){
 		}
 		doDead();
 	}
+}
+
+void Items::timedoDead(float t){
+	doDead();
 }
 //
 //Items* Items::instance = nullptr;

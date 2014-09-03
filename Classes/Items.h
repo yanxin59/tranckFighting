@@ -15,6 +15,7 @@ public:
 	Rect itemsBox;
 protected:
 	void update(float t);
+	void timedoDead(float t);
 //protected:
 //	static Items* instance;
 //private:
