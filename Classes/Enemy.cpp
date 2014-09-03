@@ -27,8 +27,8 @@ bool Enemy::init(){
 	sp->setPosition(sizep/2);                        //Rect 基点为左下角 设基点与node位置重合
 	addChild(sp);
 	setbindSprite(sp);
-	schedule(schedule_selector(Enemy::changejd),3);  //方向改变计时器
-	schedule(schedule_selector(Enemy::move),speed);    //行走即障碍规避计时器
+	schedule(schedule_selector(Enemy::changejd),6);  //方向改变计时器
+
 	schedule(schedule_selector(Enemy::addFire), 1.2);
 	
 	return true;
@@ -39,7 +39,7 @@ void Enemy::addFire(float t){
 	auto b = Bullet::create((float)jd, p, mark);
 	auto s = dynamic_cast<GameScene*>(Director::getInstance()->getRunningScene());
     s->getLayer()->addBullet(b);
-    //SimpleAudioEngine::getInstance()->playEffect("bullet.aif");
+    SimpleAudioEngine::getInstance()->playEffect("bullet.aif");
 
 }
 bool Enemy::hurt(int attackValue){
@@ -73,7 +73,7 @@ int Enemy::makeTurn(){
 }
 void Enemy::move(float t){
     
-    //SimpleAudioEngine::getInstance()->playEffect("move.aif");
+    SimpleAudioEngine::getInstance()->playEffect("move.aif");
     
 	int key = 1;
 
@@ -182,4 +182,8 @@ void Enemy::doAction(){
 	CallFunc * cf = CallFunc::create(CC_CALLBACK_0(Enemy::die,this));
 	Sequence * seq = Sequence::create(ai,cf,NULL);
 	getbindSprite()->runAction(seq);
+}
+void Enemy::onEnter(){
+	Entity::onEnter();
+	schedule(schedule_selector(Enemy::move),speed);    //行走即障碍规避计时器
 }

@@ -3,7 +3,7 @@
 #include "cocos2d.h"
 #include "Enemy.h"
 #define FASTHP 400
-#define FASTTIME 0.15
+#define FASTTIME 0.2
 using namespace cocos2d;
 class FasterTank:public Enemy{
 public:

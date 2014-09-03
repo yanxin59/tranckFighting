@@ -13,6 +13,7 @@ protected:
 	int HP;                                //血量初始200
 	int mark;                              //主机敌机标记
 	float speed;
+	void onEnter();
 public:
 	bool death;                            //死亡状态,假为死亡
 	CC_SYNTHESIZE(int,score,Score);
