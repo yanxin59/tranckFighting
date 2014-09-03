@@ -21,12 +21,12 @@ bool ControllerLayer::init(){
     auto tControl = Sprite::create("control_bg.png");
     tControl->setPosition(Vec2(tControl->getContentSize().width/2,tControl->getContentSize().height/2));
     this->addChild(tControl,1);
-    tControl->setOpacity(150);
+    tControl->setOpacity(80);
     
     auto tHandle = Sprite::create("cen.png");
     tHandle->setPosition(Vec2(tControl->getContentSize().width/2,tControl->getContentSize().height/2));
     this->addChild(tHandle,1);
-    tHandle->setOpacity(200);
+    tHandle->setOpacity(100);
     
     tanks * tank = tanks::getInstance();
     
@@ -44,7 +44,7 @@ bool ControllerLayer::init(){
         }
     };
     listen->onTouchMoved = [ = ](Touch * t , Event * e){
-        
+
         auto p1 = Director::getInstance()->convertToGL( t->getLocationInView());
         auto p2 = Director::getInstance()->convertToGL(t ->getPreviousLocationInView());
         auto p3 = p1 - p2;
@@ -146,19 +146,16 @@ bool ControllerLayer::init(){
     return true;
 }
 void ControllerLayer::update(float t){
+    if (_iLeft == 1)
+        _funcTankMove(en_Left);
+
+    if (_iLeft == 2)
+        _funcTankMove(en_Right);
     
-    
-    if (_iLeft == 1) {
-        tanks::getInstance()->move(en_Left);
-    }
-    if (_iLeft == 2) {
-        tanks::getInstance()->move(en_Right);
-    }
-    if (_iUp == 1) {
-        tanks::getInstance()->move(en_Up);
-    }
-    if (_iUp == 2) {
-        tanks::getInstance()->move(en_Down);
-    }
-//    tanks::getInstance()->move(tRotation);
+    if (_iUp == 1)
+        _funcTankMove(en_Up);
+
+    if (_iUp == 2)
+        _funcTankMove(en_Down);
+
 }

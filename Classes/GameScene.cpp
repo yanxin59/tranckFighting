@@ -13,6 +13,7 @@
 #include "ControllerLayer.h"
 #include "SimpleAudioEngine.h"
 #include "ScoreLayer.h"
+#include "tanks.h"
 
 using namespace CocosDenshion;
 
@@ -20,24 +21,27 @@ bool GameScene::init(){
 	if (!Scene::init()){
 		return false;
 	}
-	Maps * tPMap = Maps::create();
-	tPMap->setName("map");
-	this->addChild(tPMap);
+
 
 	auto tPEnemyLayer = EnemyLayer::create();
 	tPEnemyLayer->setAnchorPoint(Point::ZERO);
 	tPEnemyLayer->setPosition(Point::ZERO);
-	this->addChild(tPEnemyLayer);
+	this->addChild(tPEnemyLayer, 0);
 
 	auto tPControllerLayer = ControllerLayer::create();
-    this->addChild(tPControllerLayer);
+    tPControllerLayer->setFuncTankMove(std::bind( (void (tanks::*)(const Rotation&))(&tanks::move), tanks::getInstance(), std::placeholders::_1) );
+    this->addChild(tPControllerLayer, 4);
     
 	auto tPBulletLayer = BulletLayer::create();
     tPBulletLayer->setTag(1);
-	this->addChild(tPBulletLayer);
+	this->addChild(tPBulletLayer, 1);
+    
+    Maps * tPMap = Maps::create();
+	tPMap->setName("map");
+	this->addChild(tPMap, 3);
     
     auto tPScoreLayer = ScoreLayer::create();
-    addChild(tPScoreLayer);
+    addChild(tPScoreLayer, 2);
     
     SimpleAudioEngine::getInstance()->playEffect("startSound.wav");
 	

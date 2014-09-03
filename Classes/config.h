@@ -28,4 +28,12 @@ enum TankState
     en_AddBulletSpeedState
 };
 
+enum Rotation
+{
+    en_Up = 0,
+    en_Right = 90,
+    en_Down = 180,
+    en_Left = 270
+};
+
 #endif

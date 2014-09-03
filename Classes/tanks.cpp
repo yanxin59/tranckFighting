@@ -62,6 +62,7 @@ void tanks::reset()
 
 void tanks::addFire(){
     
+    if(getIsDead()) return;
     auto bu = Bullet::create(getRotation(), getPosition(), 1);//创建子弹
     
     auto gamescene  =  dynamic_cast<GameScene *>(Director::getInstance()->getRunningScene());//通过导演得到运行中的场景
@@ -71,7 +72,6 @@ void tanks::addFire(){
     layer->addBullet(bu);//把子弹加到子弹层
     
     SimpleAudioEngine::getInstance()->playEffect("bullet.aif");
-    
     //点击按钮,开火
 }
 
@@ -165,14 +165,13 @@ void tanks::move(const Rotation &rRotation)
 }
 
 
-
 bool tanks::judge()
 {
     
     auto tMap = (dynamic_cast<GameScene *>(Director::getInstance()->getRunningScene()))->getMap();
     auto tBg = tMap->m_bg;
     auto tIron = tMap->m_iron;
-    
+    auto tBrid = tMap->m_bird;
     auto tRotate = getRotation();
     auto tBgheight = tBg->getLayerSize().height;
     auto tBgWidth = tBg->getLayerSize().width;
@@ -191,7 +190,7 @@ bool tanks::judge()
         
         if(py1 < tBgZero) py1 = tBgZero;
         if(py1 > tBgheight - 1) py1 = tBgheight - 1;
-        if(tBg->getTileGIDAt(Vec2(px1, py1)) || tBg->getTileGIDAt(Vec2(px2, py1)) || tIron->getTileGIDAt(Vec2(px1, py1)) || tIron->getTileGIDAt(Vec2(px2, py1)))
+        if(tBg->getTileGIDAt(Vec2(px1, py1)) || tBg->getTileGIDAt(Vec2(px2, py1)) || tIron->getTileGIDAt(Vec2(px1, py1)) || tIron->getTileGIDAt(Vec2(px2, py1)) || tBrid->getTileGIDAt(Vec2(px1, py1)) || tBrid->getTileGIDAt(Vec2(px2, py1)))
         {
             return true;
         }
@@ -205,7 +204,7 @@ bool tanks::judge()
 
         if(px1 > tBgWidth - 1) px1 = tBgWidth - 1;
         if(px1 < tBgZero) px1 = tBgZero;
-        if(tBg->getTileGIDAt(Vec2(px1, py2)) || tBg->getTileGIDAt(Vec2(px1, py1)) || tIron->getTileGIDAt(Vec2(px1, py2)) || tIron->getTileGIDAt(Vec2(px1, py1)))
+        if(tBg->getTileGIDAt(Vec2(px1, py2)) || tBg->getTileGIDAt(Vec2(px1, py1)) || tIron->getTileGIDAt(Vec2(px1, py2)) || tIron->getTileGIDAt(Vec2(px1, py1)) || tBrid->getTileGIDAt(Vec2(px1, py1)) || tBrid->getTileGIDAt(Vec2(px1, py2)))
         {
             return true;
         }

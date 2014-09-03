@@ -10,17 +10,7 @@
 #define __tranckFighting__tanks__
 
 
-#include "cocos2d.h"
-//坦克单例
-using namespace cocos2d;
-
-enum Rotation
-{
-    en_Up = 0,
-    en_Right = 90,
-    en_Down = 180,
-    en_Left = 270
-};
+#include "config.h"
 
 #define TANK_SPEED 2
 

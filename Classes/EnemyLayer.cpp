@@ -14,6 +14,7 @@
 #include "PopTank.h"
 #include "GameScene.h"
 #include "Map.h"
+#include "EnemyVector.h"
 
 bool EnemyLayer::init(){
 	if(!Layer::init()){
@@ -33,6 +34,7 @@ bool EnemyLayer::init(){
 void EnemyLayer::onExit()
 {
     Layer::onExit();
+    EnemyVector::getInstence()->clearEnemy();
 }
 
 void EnemyLayer::createEnemy(){
