@@ -19,14 +19,16 @@ bool ControllerLayer::init(){
     _iLeft = 0;
     _iUp = 0;
     auto tControl = Sprite::create("control_bg.png");
-    tControl->setPosition(Vec2(tControl->getContentSize().width/2,tControl->getContentSize().height/2));
     this->addChild(tControl,1);
     tControl->setOpacity(80);
+    tControl->setScale(2);
+    tControl->setPosition(Vec2(tControl->getContentSize().width/2,tControl->getContentSize().height/2));
     
     auto tHandle = Sprite::create("cen.png");
-    tHandle->setPosition(Vec2(tControl->getContentSize().width/2,tControl->getContentSize().height/2));
     this->addChild(tHandle,1);
     tHandle->setOpacity(100);
+    tHandle->setScale(2);
+    tHandle->setPosition(Vec2(tControl->getContentSize().width/2,tControl->getContentSize().height/2));
     
     tanks * tank = tanks::getInstance();
     
