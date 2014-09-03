@@ -33,8 +33,6 @@ protected:
     
     virtual void changeScore(Ref *pData);
     
-    virtual void killEnemyCount(Ref *pData);
-    
     virtual void changeEnemyCount(Ref *pData);
     
     virtual void loadLabel();

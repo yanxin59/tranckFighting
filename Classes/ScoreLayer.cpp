@@ -38,7 +38,6 @@ ScoreLayer::~ScoreLayer()
 void ScoreLayer::registerScoreEvent()
 {
     NotificationCenter::getInstance()->addObserver(this, callfuncO_selector(ScoreLayer::changeScore), "addScore", nullptr);
-    NotificationCenter::getInstance()->addObserver(this, callfuncO_selector(ScoreLayer::killEnemyCount), "killEnemy", nullptr);
     NotificationCenter::getInstance()->addObserver(this, callfuncO_selector(ScoreLayer::changeEnemyCount), "changeEnemyCount", nullptr);
 }
 
@@ -52,12 +51,10 @@ void ScoreLayer::changeScore(cocos2d::Ref *pData)
 {
     _score += *(reinterpret_cast<int*>(pData));
     _pScoreLabel->setString(StringUtils::format("%d", _score));
-}
-
-void ScoreLayer::killEnemyCount(cocos2d::Ref *pData)
-{
+    
     _killEnemyCount += 1;
     _pKillEnemyCountLabel->setString(StringUtils::format("%d", _killEnemyCount));
+
 }
 
 void ScoreLayer::onEnter()
