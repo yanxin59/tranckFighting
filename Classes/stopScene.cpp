@@ -7,7 +7,8 @@
 //
 
 #include "stopScene.h"
-#include "GameScene.h"
+#include "config.h"
+
 
 bool stopScene::init(){
     
@@ -15,25 +16,36 @@ bool stopScene::init(){
         return false;
     }
     
-    auto layer = Layer::create();
-    this->addChild(layer);
+    auto layerWin = Layer::create();
+    this->addChild(layerWin);
+    
+    auto layerLose = Layer::create();
+    this->addChild(layerLose);
+    auto loseSp = Sprite::create("gamedone.png");
+    layerLose->addChild(loseSp);
+    loseSp->setPosition(Vec2(480,320));
+    loseSp->setScale(4.0, 4.0);
     
     
-    MenuItemImage * item = MenuItemImage::create("gamedone.png","gamedone.png",[=](Ref * sender){
-    
-        auto scene = GameScene::create();
+    MenuItemImage * image = MenuItemImage::create("close.png","open.png",[=](Ref * sender){
         
-        Director::getInstance()->replaceScene(scene);
+        auto tSceneType = en_GameScene;
         
+        NotificationCenter::getInstance()->postNotification("changeScene", reinterpret_cast<Ref *>(& tSceneType));
+    
     });
+    Size s = Director::getInstance()->getVisibleSize();
+    Size sbutton = image->getContentSize();
+    image->setPosition(Vec2(s.width-sbutton.width/2,sbutton.height/2));
     
-//    item->setPosition(Vec2(480,320));
-    Menu * menu = Menu::create(item, nullptr);
-//    menu->setPosition(Vec2(0,0));
-    layer->addChild(menu);
+    Menu * menu = Menu::create(image,NULL);
+    menu->setPosition(Vec2(0,0));
+    this->addChild(menu);
     
-//    auto act = JumpBy::create(3, Vec2(0,0), 100, 10);
-//    menu->runAction(act);
+    
+    
+    
+    
     
     return true;
 }
