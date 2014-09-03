@@ -19,6 +19,7 @@ public:
 	cocos2d::TMXLayer *m_bg;
 	cocos2d::TMXLayer *m_bird;
 	cocos2d::TMXLayer *m_iron;
+	cocos2d::TMXLayer *m_water;
     cocos2d::TMXObjectGroup *_pObjectGroup;
     
 	CREATE_FUNC(Maps);

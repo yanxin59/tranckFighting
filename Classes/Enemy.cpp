@@ -96,6 +96,7 @@ void Enemy::move(float t){
 	cocos2d::TMXLayer *bg = myMap->m_bg;
 	cocos2d::TMXLayer *bird = myMap->m_bird;
 	cocos2d::TMXLayer *iron = myMap->m_iron;
+	cocos2d::TMXLayer *water = myMap->m_water;
 	Point p = this->getPosition();
 	int w,h;
 	switch(this->jd){
@@ -130,20 +131,20 @@ void Enemy::move(float t){
 	Vec2 t_map1 = Vec2(tpoint1.x/STEP ,40 - tpoint1.y/STEP);
 	Vec2 t_map2 = Vec2(tpoint2.x/STEP ,40 - tpoint2.y/STEP);
 	if(this->jd == 90 || this->jd == 270){
-	if(bg->getTileGIDAt(t_map1) != 0 || iron->getTileGIDAt(t_map1) != 0){
+	if(bg->getTileGIDAt(t_map1) != 0 || iron->getTileGIDAt(t_map1) != 0 || water->getTileGIDAt(t_map1) != 0){
 		key = 0;
 	}
-	if(bg->getTileGIDAt(t_map2) != 0 || iron->getTileGIDAt(t_map2) != 0){
+	if(bg->getTileGIDAt(t_map2) != 0 || iron->getTileGIDAt(t_map2) != 0 || water->getTileGIDAt(t_map2) != 0){
 		key = 0;
 	}
 	}
 	if(this->jd == 0 || this->jd == 180){
 		t_map1 = myMap->getGID(tpoint1);
 		t_map2 = myMap->getGID(tpoint2);	
-		if(bg->getTileGIDAt(t_map1) != 0 || iron->getTileGIDAt(t_map1) != 0){
+		if(bg->getTileGIDAt(t_map1) != 0 || iron->getTileGIDAt(t_map1) != 0 || water->getTileGIDAt(t_map1) != 0){
 			key = 0;
 		}
-		if(bg->getTileGIDAt(t_map2) != 0 || iron->getTileGIDAt(t_map2) != 0){
+		if(bg->getTileGIDAt(t_map2) != 0 || iron->getTileGIDAt(t_map2) != 0 || water->getTileGIDAt(t_map2) != 0){
 			key = 0;
 		}
 	}
