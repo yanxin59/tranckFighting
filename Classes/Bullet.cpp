@@ -9,18 +9,18 @@ bool Bullet::init(float r, Vec2 v){
 	setEntityType(0);
 	//设置速度
 	setISpeed(300);
-
-	//_pSprite = nullptr;
 	//创建精灵
 	setbindSprite(Sprite::create("bullet.png"));
+	//图片缩放0.5
 	getbindSprite()->setScale(0.5);
+	//得到缩放后子弹的图片大小
 	buletsize = getbindSprite()->getContentSize()/2;
 	this->addChild(getbindSprite());
 	//攻击力
 	this->attack = BULLETATTACK;
 	//根据坦克角度旋转子弹
 	this->setRotation(r);
-	//将子弹初始位置置为坦克位置
+	//计算子弹不同方向的位置
 	auto ss = buletsize;
 	auto maxs = ss.width > ss.height ? ss.width:ss.height;
 	switch ((int)r){
@@ -32,12 +32,12 @@ bool Bullet::init(float r, Vec2 v){
 		break;
 	}
 	auto vs = v + ss;
+	//将子弹初始位置置为坦克位置
 	this->setPosition(vs);
 	//将子弹加入容器
 	BulletsBox::getInstance()->addBullet(this);
 	//移动
 	move();
-	//添加
 	
 	return true;
 }
@@ -70,7 +70,6 @@ Bullet* Bullet::create(float r, Vec2 v, int t){
 void Bullet::move(){
 	//设置移动允许的最大值，现在为屏幕宽度
 	float sum = Director::getInstance()->getVisibleSize().width;
-	
 	//设置移动偏移量
 	float moveX = 0;
 	float moveY = 0;
@@ -80,7 +79,6 @@ void Bullet::move(){
 	auto bs = buletsize;
 	auto maxs = bs.width > bs.height ? bs.width:bs.height;
 	switch ((int)(this->getRotation())){
-		
 		case 0:sum = Director::getInstance()->getVisibleSize().height;positionBullet = this->getPosition().y;moveY = sum - positionBullet + maxs;break;
 		case 90:positionBullet = this->getPosition().x;moveX = sum - positionBullet + maxs;break;
 		case 180:sum = 0;positionBullet = -this->getPosition().y;moveY = positionBullet - maxs;break;
