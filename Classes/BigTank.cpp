@@ -1,5 +1,6 @@
 
 #include "BigTank.h"
+#include "Items.h"
 bool BigTank::init(){
 	if(!Enemy::init()){
 		return false;
@@ -26,6 +27,7 @@ bool BigTank::hurt(int attackValue){
 		auto center = __NotificationCenter::getInstance();
 		center->postNotification("addScore",p_score);
 		death = false;
+		Items * item = Items::create(); 
 		this->doAction();
 		return true;                       //·µ»ØÕæÎªËÀÍö
 	}

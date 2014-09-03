@@ -1,6 +1,6 @@
 #include "Map.h"
 
-Maps::Maps():m_Map(nullptr), m_bg(nullptr), m_iron(nullptr), m_bird(nullptr), _pObjectGroup(nullptr)
+Maps::Maps():m_Map(nullptr), m_bg(nullptr), m_iron(nullptr), m_bird(nullptr),m_water(nullptr), _pObjectGroup(nullptr)
 {
     
 }
@@ -11,6 +11,7 @@ Maps::~Maps()
     CC_SAFE_RELEASE_NULL(m_bird);
     CC_SAFE_RELEASE_NULL(m_iron);
     CC_SAFE_RELEASE_NULL(m_bg);
+	CC_SAFE_RELEASE_NULL(m_water);
     CC_SAFE_RELEASE_NULL(m_Map);
 }
 
@@ -30,6 +31,8 @@ bool Maps::init(){
 	m_iron->retain();
 	m_bird = map->getLayer("bird");
 	m_bird->retain();
+	m_water = map->getLayer("water");
+	m_water->retain();
     _pObjectGroup = map->getObjectGroup("object");
     _pObjectGroup->retain();
 	return true;
