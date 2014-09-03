@@ -12,40 +12,23 @@
 #include "tanks.h"
 #include "FasterTank.h"
 #include "PopTank.h"
+#include "GameScene.h"
+#include "Map.h"
 bool EnemyLayer::init(){
 	if(!Layer::init()){
 		return false;
 	}
 
-//	Enemy * e1 = Enemy::create();
-//	e1->setPosition(16*6,16*4);
-//	addChild(e1);
-//	Enemy * e2 = BigTank::create();
-//	e2->setPosition(16*16,16*4);
-//	addChild(e2);
-//	Enemy * e3 = Enemy::create();
-//	e3->setPosition(16*36,16*4);
-//	addChild(e3);
-//	Enemy * e4 = Enemy::create();
-//	e4->setPosition(16*46,16*4);
-//	addChild(e4);
-	/*Enemy * e1 = Enemy::create();
-	e1->setPosition(16*6,16*4);
-	addChild(e1);
-	Enemy * e2 = BigTank::create();
-	e2->setPosition(16*16,16*4);
-	addChild(e2);
-	Enemy * e3 = FasterTank::create();
-	e3->setPosition(16*36,16*4);
-	addChild(e3);
-	Enemy * e4 = Enemy::create();
-	e4->setPosition(16*46,16*4);
-	addChild(e4);*/
 	PopTank * p_Tank = PopTank::create();
 	addChild(p_Tank);
 
 	tanks * main = tanks::getInstance();
 	addChild(main);
+
+    auto map = TMXTiledMap::create("mapNew.tmx");
+    auto playerPosValueMap = map->getObjectGroup("object")->getObject("player");
+    main->setPosition(Vec2(playerPosValueMap.at("x").asFloat(), playerPosValueMap.at("y").asFloat()));
+    
 	return true;
 }
 void EnemyLayer::createEnemy(){

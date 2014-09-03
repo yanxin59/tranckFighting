@@ -23,7 +23,7 @@ bool GameScene::init(){
 	Maps * map = Maps::create();
 	map->setName("map");
 	this->addChild(map);
-//    map->setPosition(Vec2(0, 208));
+
 	auto elayer = EnemyLayer::create();
 	elayer->setAnchorPoint(Point::ZERO);
 	elayer->setPosition(Point::ZERO);
@@ -48,5 +48,5 @@ BulletLayer* GameScene::getLayer(){
 	return dynamic_cast<BulletLayer*>(this->getChildByTag(1));
 }
 Maps * GameScene::getMap(){
-	return (Maps *)(getChildByName("map"));
+	return dynamic_cast<Maps*>(getChildByName("map"));
 }
