@@ -21,16 +21,14 @@ bool ControllerLayer::init(){
     auto tControl = Sprite::create("control_bg.png");
     this->addChild(tControl,1);
     tControl->setOpacity(80);
-    tControl->setScale(2);
     tControl->setPosition(Vec2(tControl->getContentSize().width/2,tControl->getContentSize().height/2));
     
     auto tHandle = Sprite::create("cen.png");
+    tHandle->setPosition(Vec2(tControl->getContentSize().width/2,tControl->getContentSize().height/2));
     this->addChild(tHandle,1);
     tHandle->setOpacity(100);
-    tHandle->setScale(2);
-    tHandle->setPosition(Vec2(tControl->getContentSize().width/2,tControl->getContentSize().height/2));
     
-    tanks * tank = tanks::getInstance();
+//    tanks * tank = tanks::getInstance();
     
     
     auto listen = EventListenerTouchOneByOne::create();
@@ -132,7 +130,7 @@ bool ControllerLayer::init(){
 
     MenuItemImage * item = MenuItemImage::create("fire_button_default.png","fire_button_press.png",[=](Ref * sender){
  
-        tank->addFire();
+        _funcTankFire();
     });
     item->setScale(0.8);
     item->setOpacity(50);
@@ -147,7 +145,8 @@ bool ControllerLayer::init(){
     
     return true;
 }
-void ControllerLayer::update(float t){
+void ControllerLayer::update(float t)
+{
     if (_iLeft == 1)
         _funcTankMove(en_Left);
 

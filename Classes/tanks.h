@@ -16,6 +16,7 @@
 
 #define SEGMENTSIZE 16
 
+class Bullet;
 #include "Entity.h"
 class tanks:public Entity {
 private:
@@ -35,20 +36,19 @@ private:
     
     Size _tankSize;
     
-    int _tankLifeCount;
-    
     TankState _tankState;
     
     Vec2 _tankInitPos;
+    
+    CC_SYNTHESIZE_PASS_BY_REF(int, _tankLifeCount, TankLifeCount);
+    
+    CC_SYNTHESIZE_PASS_BY_REF(std::function<void (Bullet *)>, _funcAddBulletToLayer, FuncAddBulletToLayer);
     
 private:
     
     static tanks * instance;
     
 protected:
-    
-//    Sprite * _pTank;//成员变量只为了加入图片
-//    virtual void mineTankDie();//主坦克死亡
     
     virtual bool judge();//判断前方是否有障碍物
     
@@ -63,6 +63,8 @@ protected:
     virtual void doAction();
     
     virtual void initTank();
+    
+    virtual void onEnter()override;
 
 public:
     

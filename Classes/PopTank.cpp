@@ -29,7 +29,6 @@ void PopTank::addPoint(Vec2 vec){
 void PopTank::mydate(float t){
 	auto ev = EnemyVector::getInstence();
 	auto eve = ev->getEV();
-	log("%d",eve.size());
 	int s_k = rand()%10;
 	int s_p = rand()%(point.size());
 
@@ -56,5 +55,5 @@ void PopTank::mydate(float t){
 		elayer->addChild(p_enemy);
 		count--;
 	}
-	
 }
+

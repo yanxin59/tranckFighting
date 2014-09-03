@@ -35,7 +35,11 @@ protected:
     
     virtual void changeEnemyCount(Ref *pData);
     
+    virtual void changeTankLifeCount(Ref *pData);
+    
     virtual void loadLabel();
+    
+    virtual void initData();
     
 private:
     
@@ -45,11 +49,15 @@ private:
     
     int _killEnemyCount;
     
+    int _tankLifeCount;
+    
     Label *_pScoreLabel;
     
     Label *_pEnemyCountLabel;
     
     Label *_pKillEnemyCountLabel;
+    
+    Label *_pTankLifeCountLabel;
 private:
     
     ScoreLayer();

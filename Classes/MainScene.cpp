@@ -7,9 +7,8 @@
 //
 
 #include "MainScene.h"
-#include "GameScene.h"
-#include <SimpleAudioEngine.h>
-using namespace CocosDenshion;
+#include "SceneManager.h"
+
 bool MainScene::init(){
     
     if (!Scene::init()) {
@@ -21,10 +20,8 @@ bool MainScene::init(){
     this->addChild(layer);
     
     MenuItemImage * item = MenuItemImage::create("BattleCity.png","BattleCity.png",[=](Ref * sender){
-        
-        auto scene = GameScene::create();
-        Director::getInstance()->replaceScene(scene);
-        
+        auto tSceneType = en_GameScene;
+        NotificationCenter::getInstance()->postNotification("changeScene", reinterpret_cast<Ref*>(&tSceneType));
         
     });
     item->setPosition(Vec2(480,320));

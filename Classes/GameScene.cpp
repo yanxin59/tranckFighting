@@ -30,20 +30,23 @@ bool GameScene::init(){
 
 	auto tPControllerLayer = ControllerLayer::create();
     tPControllerLayer->setFuncTankMove(std::bind( (void (tanks::*)(const Rotation&))(&tanks::move), tanks::getInstance(), std::placeholders::_1) );
+    tPControllerLayer->setFuncTankFire(CC_CALLBACK_0(tanks::addFire, tanks::getInstance()));
     this->addChild(tPControllerLayer, 4);
     
 	auto tPBulletLayer = BulletLayer::create();
     tPBulletLayer->setTag(1);
-	this->addChild(tPBulletLayer, 1);
+	this->addChild(tPBulletLayer, 2);
+    
+    tanks::getInstance()->setFuncAddBulletToLayer(CC_CALLBACK_1(BulletLayer::addBullet, tPBulletLayer));
     
     Maps * tPMap = Maps::create();
 	tPMap->setName("map");
-	this->addChild(tPMap, 3);
+	this->addChild(tPMap, 1);
     
     auto tPScoreLayer = ScoreLayer::create();
-    addChild(tPScoreLayer, 2);
+    addChild(tPScoreLayer, 3);
     
-    SimpleAudioEngine::getInstance()->playEffect("startSound.wav");
+    SimpleAudioEngine::getInstance()->playBackgroundMusic("startSound.wav");
 	
 	return true;
 }

@@ -7,13 +7,10 @@
 //
 
 #include "tanks.h"
-#include "GameScene.h"
-#include "Map.h"
 #include "Bullet.h"
-#include "BulletLayer.h"
 #include "SimpleAudioEngine.h"
-#include "stopScene.h"
 #include "config.h"
+
 using namespace CocosDenshion;
 
 tanks * tanks::instance = nullptr;
@@ -50,6 +47,7 @@ void tanks::initTank()
     auto playerPosValueMap = map->getObjectGroup("object")->getObject("player");
     _tankInitPos = Vec2(playerPosValueMap.at("x").asFloat(), playerPosValueMap.at("y").asFloat());
     setPosition(_tankInitPos);
+    setISpeed(TANK_SPEED);
 }
 
 void tanks::reset()
@@ -58,6 +56,7 @@ void tanks::reset()
     _tankState = en_NormalState;
     _tankLifeCount = 3;
     setPosition(_tankInitPos);
+
 }
 
 void tanks::addFire(){
@@ -65,20 +64,28 @@ void tanks::addFire(){
     if(getIsDead()) return;
     auto bu = Bullet::create(getRotation(), getPosition(), 1);//创建子弹
     
-    auto gamescene  =  dynamic_cast<GameScene *>(Director::getInstance()->getRunningScene());//通过导演得到运行中的场景
+//    auto gamescene  =  dynamic_cast<GameScene *>(Director::getInstance()->getRunningScene());//通过导演得到运行中的场景
+//    
+//    auto layer = gamescene->getLayer();//通过运行的场景得到子弹层
     
-    auto layer = gamescene->getLayer();//通过运行的场景得到子弹层
-    
-    layer->addBullet(bu);//把子弹加到子弹层
+//    layer->addBullet(bu);//把子弹加到子弹层
+    _funcAddBulletToLayer(bu);
     
     SimpleAudioEngine::getInstance()->playEffect("bullet.aif");
     //点击按钮,开火
+}
+
+void tanks::onEnter()
+{
+    Entity::onEnter();
+    NotificationCenter::getInstance()->postNotification("changeTankLifeCount", reinterpret_cast<Ref*>(&_tankLifeCount));
 }
 
 void tanks::doDead()
 {
     setIsDead(true);
     doAction();
+    NotificationCenter::getInstance()->postNotification("changeTankLifeCount");
     if(--_tankLifeCount == 0)
     {
         auto tSceneType = en_GameEndScene;
@@ -106,7 +113,7 @@ Rect tanks::getBoundingBox()
 
 void tanks::up(){
     
-    setPositionY(getPositionY()+TANK_SPEED);//一步一步移动
+    setPositionY(getPositionY() + _iSpeed);//一步一步移动
     Size s = Director::getInstance()->getVisibleSize();//屏幕尺寸
 
     if (getPositionY() >= (s.height - _tankSize.height/2))
@@ -118,7 +125,7 @@ void tanks::up(){
 
 void tanks::down()
 {
-    setPositionY(getPositionY()-TANK_SPEED);
+    setPositionY(getPositionY() - _iSpeed);
     if (getPositionY() < _tankSize.height/2) {
         
         setPositionY(_tankSize.height/2);
@@ -126,7 +133,7 @@ void tanks::down()
 }
 void tanks::left()
 {
-    setPositionX(getPositionX()-TANK_SPEED);
+    setPositionX(getPositionX() - _iSpeed);
     if (getPositionX() < _tankSize.width/2) {
         setPositionX(_tankSize.width/2);
     }
@@ -134,7 +141,7 @@ void tanks::left()
 }
 void tanks::right()
 {
-    setPositionX(getPositionX()+TANK_SPEED);
+    setPositionX(getPositionX() + _iSpeed);
     Size s = Director::getInstance()->getVisibleSize();
     if (getPositionX() >= (s.width-_tankSize.width/2 )) {
         setPositionX(s.width-_tankSize.width/2);
@@ -168,11 +175,11 @@ void tanks::move(const Rotation &rRotation)
 bool tanks::judge()
 {
     
-    auto tMap = (dynamic_cast<GameScene *>(Director::getInstance()->getRunningScene()))->getMap();
-    auto tBg = tMap->m_bg;
-    auto tIron = tMap->m_iron;
-    auto tBrid = tMap->m_bird;
-    auto tWater = tMap->m_water;
+    auto tMap = TMXTiledMap::create("mapNewer.tmx");
+    auto tBg = tMap->getLayer("bg");
+    auto tIron = tMap->getLayer("iron");
+    auto tBrid = tMap->getLayer("bird");
+    auto tWater = tMap->getLayer("water");
     auto tRotate = getRotation();
     auto tBgheight = tBg->getLayerSize().height;
     auto tBgWidth = tBg->getLayerSize().width;
