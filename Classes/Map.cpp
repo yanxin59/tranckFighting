@@ -1,4 +1,5 @@
 #include "Map.h"
+
 bool Maps::init(){
 	if(!Layer::init()){
 		return false;
@@ -13,8 +14,12 @@ bool Maps::init(){
 	m_iron->retain();
 	m_bird = map->getLayer("bird");
 	m_bird->retain();
+    _pObjectGroup = map->getObjectGroup("object");
+    _pObjectGroup->retain();
 	return true;
 }
+
+
 Point Maps::getGID(Vec2 ver){
 	int x = ver.x / m_Map->getTileSize().width;
 	int y = ((m_Map->getMapSize().height * m_Map->getTileSize().height) - ver.y) / m_Map->getTileSize().height;

@@ -35,7 +35,8 @@ bool BulletLayer::init(){
 }
 
 //将子弹贴在层上的函数
-void BulletLayer::addBullet(Bullet* b){
+void BulletLayer::addBullet(Bullet* b)
+{
 	this->addChild(b);
 }
 

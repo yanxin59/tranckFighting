@@ -14,15 +14,21 @@
 //坦克单例
 using namespace cocos2d;
 
+enum Rotation
+{
+    en_Up = 0,
+    en_Right = 90,
+    en_Down = 180,
+    en_Left = 270
+};
+
+#define SEGMENTSIZE 16
+
 class tanks:public Node{
 private:
     
-    tanks()
-    {
-        
-        _pTank = Sprite::create("p1-a-cell.png");
-        this->addChild(_pTank);
-    }
+    tanks();
+
     
     tanks(const tanks & anotherTank){}//拷贝构造函数:防止单例被构造另一个
     tanks operator = (const tanks & anotherTank){
@@ -30,7 +36,7 @@ private:
         return anotherTank;
     }//等号运算符重载:防止单例被复制另一个
 protected:
-
+    
     Sprite * _pTank;//成员变量只为了加入图片
     static tanks * instance;
     CREATE_FUNC(tanks);
@@ -47,6 +53,5 @@ public:
     virtual void right();//坦克向右移动方法
     virtual Rect getBoundingBox();
     virtual void playAnimation();
-    
 };
 #endif /* defined(__tranckFighting__tanks__) */

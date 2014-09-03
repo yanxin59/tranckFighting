@@ -12,6 +12,8 @@
 #include "Map.h"
 #include "ControllerLayer.h"
 #include "SimpleAudioEngine.h"
+#include "ScoreLayer.h"
+
 using namespace CocosDenshion;
 
 bool GameScene::init(){
@@ -21,6 +23,7 @@ bool GameScene::init(){
 	Maps * map = Maps::create();
 	map->setName("map");
 	this->addChild(map);
+//    map->setPosition(Vec2(0, 208));
 	auto elayer = EnemyLayer::create();
 	elayer->setAnchorPoint(Point::ZERO);
 	elayer->setPosition(Point::ZERO);
@@ -32,6 +35,9 @@ bool GameScene::init(){
 	auto l = BulletLayer::create();
     l->setTag(1);
 	this->addChild(l);
+    
+    auto tPScoreLayer = ScoreLayer::create();
+    addChild(tPScoreLayer);
     
     SimpleAudioEngine::getInstance()->playEffect("startSound.wav");
 	
