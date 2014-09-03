@@ -43,12 +43,13 @@ void SceneManager::changeScene(Ref *pData)
     auto pDirector = Director::getInstance();
     auto pCurRuningScene = pDirector->getRunningScene();
     auto pScene = SceneFactory::createScene(_sceneType);
-    pCurRuningScene ? pDirector->runWithScene(pScene) : pDirector->replaceScene(pScene);
+    !pCurRuningScene ? pDirector->runWithScene(pScene) : pDirector->replaceScene(pScene);
 }
 
 void SceneManager::initStartScene()
 {
     Director::getInstance()->runWithScene(SceneFactory::createScene(_sceneType));
+    registerSceneTransEvent();
 }
 
 void SceneManager::registerSceneTransEvent()

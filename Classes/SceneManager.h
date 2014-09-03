@@ -46,9 +46,9 @@ private:
     
     virtual ~SceneManager();
     
-    SceneManager(const SceneManager &) = delete;
+    SceneManager(const SceneManager &){};
     
-    SceneManager &operator=(const SceneManager &) = delete;
+    SceneManager &operator=(const SceneManager &){};
 };
 
 #endif /* defined(__tranckFighting__SceneManager__) */

@@ -8,6 +8,7 @@
 
 #include "stopScene.h"
 #include "GameScene.h"
+
 bool stopScene::init(){
     
     if (!Scene::init()) {
@@ -25,14 +26,14 @@ bool stopScene::init(){
         Director::getInstance()->replaceScene(scene);
         
     });
-    item->setPosition(Vec2(480,320));
     
-    Menu * menu = Menu::create();
-    menu->setPosition(Vec2(0,0));
-    this->addChild(menu);
+//    item->setPosition(Vec2(480,320));
+    Menu * menu = Menu::create(item, nullptr);
+//    menu->setPosition(Vec2(0,0));
+    layer->addChild(menu);
     
-    auto act = JumpBy::create(3, Vec2(0,0), 100, 10);
-    layer->runAction(act);
+//    auto act = JumpBy::create(3, Vec2(0,0), 100, 10);
+//    menu->runAction(act);
     
     return true;
 }

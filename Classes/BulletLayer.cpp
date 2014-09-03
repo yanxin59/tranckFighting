@@ -14,6 +14,7 @@
 #include "Map.h"
 #include "GameScene.h"
 #include "tanks.h"
+#include "config.h"
 
 bool BulletLayer::init(){
 	if (!Layer::init()){
@@ -91,27 +92,16 @@ void BulletLayer::update(float t){
 				it1 ++;
 				continue;
 			}
-			if (bird->getTileGIDAt(Vec2(px1,py1))){
+			if (bird->getTileGIDAt(Vec2(px1,py1)) || bird->getTileGIDAt(Vec2(px2,py1)) || bird->getTileGIDAt(Vec2(px3,py1))){
 				BulletsBox::getInstance()->deleteBullet((*it1));
 				(*it1)->doDead();
 				it1 ++;
+                auto tSceneType = en_GameEndScene;
+                NotificationCenter::getInstance()->postNotification("changeScene", reinterpret_cast<Ref*>(&tSceneType));
 				continue;
 				//游戏结束
 			}
-			if (bird->getTileGIDAt(Vec2(px2,py1))){
-				BulletsBox::getInstance()->deleteBullet((*it1));
-				(*it1)->doDead();
-				it1 ++;
-				continue;
-				//游戏结束
-			}
-			if (bird->getTileGIDAt(Vec2(px3,py1))){
-				BulletsBox::getInstance()->deleteBullet((*it1));
-				(*it1)->doDead();
-				it1 ++;
-				continue;
-				//游戏结束
-			}
+			
 		}else if (r == 90.0f){
 			px1 = (bpoint.x + bsize.width/2)/16;
 			py1 = maphigth - bpoint.y/16;
@@ -152,7 +142,8 @@ void BulletLayer::update(float t){
 				BulletsBox::getInstance()->deleteBullet((*it1));
 				(*it1)->doDead();
 				it1 ++;
-                log("game over");
+                auto tSceneType = en_GameEndScene;
+                NotificationCenter::getInstance()->postNotification("changeScene", reinterpret_cast<Ref*>(&tSceneType));
 				continue;
 				//游戏结束
 			}
@@ -196,6 +187,8 @@ void BulletLayer::update(float t){
 				BulletsBox::getInstance()->deleteBullet((*it1));
 				(*it1)->doDead();
 				it1 ++;
+                auto tSceneType = en_GameEndScene;
+                NotificationCenter::getInstance()->postNotification("changeScene", reinterpret_cast<Ref*>(&tSceneType));
 				continue;
 				//游戏结束
 			}
@@ -239,7 +232,8 @@ void BulletLayer::update(float t){
 				BulletsBox::getInstance()->deleteBullet((*it1));
 				(*it1)->doDead();
 				it1 ++;
-                log("game over!");
+                auto tSceneType = en_GameEndScene;
+                NotificationCenter::getInstance()->postNotification("changeScene", reinterpret_cast<Ref*>(&tSceneType));
 				continue;
 				//游戏结束
 			}
