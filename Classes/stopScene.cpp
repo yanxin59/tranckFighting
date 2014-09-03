@@ -7,7 +7,7 @@
 //
 
 #include "stopScene.h"
-#include "GameScene.h"
+#include "config.h"
 
 bool stopScene::init(){
     
@@ -20,20 +20,12 @@ bool stopScene::init(){
     
     
     MenuItemImage * item = MenuItemImage::create("gamedone.png","gamedone.png",[=](Ref * sender){
-    
-        auto scene = GameScene::create();
-        
-        Director::getInstance()->replaceScene(scene);
-        
+        auto tSceneType = en_GameScene;
+        NotificationCenter::getInstance()->postNotification("changeScene", reinterpret_cast<Ref *>(&tSceneType));
     });
     
-//    item->setPosition(Vec2(480,320));
     Menu * menu = Menu::create(item, nullptr);
-//    menu->setPosition(Vec2(0,0));
     layer->addChild(menu);
-    
-//    auto act = JumpBy::create(3, Vec2(0,0), 100, 10);
-//    menu->runAction(act);
     
     return true;
 }

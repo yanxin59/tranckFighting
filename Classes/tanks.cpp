@@ -20,10 +20,17 @@ tanks * tanks::instance = nullptr;
 
 tanks * tanks::getInstance()
 {
-    if (!instance) {
+    if (!instance)
+    {
         instance = tanks::create();
+        instance->retain();
     }
     return instance;
+}
+
+void tanks::delInstance()
+{
+    if(instance) CC_SAFE_RELEASE_NULL(instance);
 }
 
 tanks::tanks()

@@ -70,6 +70,8 @@ public:
     
     static tanks * getInstance();//获得子弹单例
     
+    static void delInstance();
+    
     virtual void addFire();//坦克开火(己放坦克打敌方坦克)
     
     virtual Rect getBoundingBox();
