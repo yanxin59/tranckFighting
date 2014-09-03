@@ -78,7 +78,7 @@ void tanks::up(){
         return ;
     
     SimpleAudioEngine::getInstance()->playEffect("move.aif");
-    setPositionY(getPositionY()+1);//一步一步移动
+    setPositionY(getPositionY()+TANK_SPEED);//一步一步移动
     Size s = Director::getInstance()->getVisibleSize();//屏幕尺寸
     Size tSize = _pTank->getContentSize();//坦克尺寸
     if (getPositionY() >= (s.height - tSize.height/2)) {
@@ -95,7 +95,7 @@ void tanks::down(){
     if(judge())
         return ;
     SimpleAudioEngine::getInstance()->playEffect("move.aif");
-    setPositionY(getPositionY()-1);
+    setPositionY(getPositionY()-TANK_SPEED);
     Size  sSize = _pTank->getContentSize();
     if (getPositionY() < sSize.height/2) {
         
@@ -109,7 +109,7 @@ void tanks::left(){
     if(judge())
         return ;
     SimpleAudioEngine::getInstance()->playEffect("move.aif");
-    setPositionX(getPositionX()-1);
+    setPositionX(getPositionX()-TANK_SPEED);
     Size sSize = _pTank->getContentSize();
     if (getPositionX() < sSize.width/2) {
         setPositionX(sSize.width/2);
@@ -123,7 +123,7 @@ void tanks::right(){
     if(judge())
         return ;
     SimpleAudioEngine::getInstance()->playEffect("move.aif");
-    setPositionX(getPositionX()+1);
+    setPositionX(getPositionX()+TANK_SPEED);
     Size s = Director::getInstance()->getVisibleSize();
     Size sSize = _pTank->getContentSize();
     if (getPositionX() >= (s.width-sSize.width/2 )) {

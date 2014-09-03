@@ -22,6 +22,8 @@ enum Rotation
     en_Left = 270
 };
 
+#define TANK_SPEED 2
+
 #define SEGMENTSIZE 16
 
 class tanks:public Node{
