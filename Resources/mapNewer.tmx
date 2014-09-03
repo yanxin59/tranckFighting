@@ -32,6 +32,6 @@
   <object name="Enemy1" x="15.0436" y="18.0524" width="33.096" height="31.0902"/>
   <object name="Enemy3" x="910.641" y="17.0494" width="33.096" height="32.0931"/>
   <object name="Enemy2" x="481.396" y="2.00582" width="33.096" height="31.0902"/>
-  <object x="399.158" y="575.669" width="31.0902" height="34.0989"/>
+  <object name="player" x="399.158" y="575.669" width="31.0902" height="34.0989"/>
  </objectgroup>
 </map>

@@ -45,6 +45,8 @@ private:
     
     Size _tankSize;
     
+    int _tankLifeCount;
+    
 private:
     
     static tanks * instance;
@@ -72,6 +74,8 @@ public:
     
     static void delInstance();
     
+    virtual void initTank();
+    
     virtual void addFire();//坦克开火(己放坦克打敌方坦克)
     
     virtual Rect getBoundingBox();
@@ -81,5 +85,6 @@ public:
     virtual void move();
     
     virtual void doDead();
+    
 };
 #endif /* defined(__tranckFighting__tanks__) */

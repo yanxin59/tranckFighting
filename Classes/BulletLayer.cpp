@@ -14,6 +14,7 @@
 #include "Map.h"
 #include "GameScene.h"
 #include "tanks.h"
+#include "config.h"
 
 bool BulletLayer::init(){
 	if (!Layer::init()){
@@ -34,7 +35,6 @@ void BulletLayer::update(float t){
 	auto ev = EnemyVector::getInstence()->getEV();
 	auto gamescene = dynamic_cast<GameScene*>(Director::getInstance()->getRunningScene());
 	auto map = gamescene->getMap();
-	cocos2d::TMXTiledMap *mMap = map->m_Map;
 	cocos2d::TMXLayer *bg = map->m_bg;
 	cocos2d::TMXLayer *bird = map->m_bird;
 	cocos2d::TMXLayer *iron = map->m_iron;
@@ -92,28 +92,17 @@ void BulletLayer::update(float t){
 				it1 ++;
 				continue;
 			}
-			if (bird->getTileGIDAt(Vec2(px1,py1))){
+			if (bird->getTileGIDAt(Vec2(px1,py1)) || bird->getTileGIDAt(Vec2(px3,py1)) || bird->getTileGIDAt(Vec2(px2,py1))){
 				BulletsBox::getInstance()->deleteBullet((*it1));
 				(*it1)->doDead();
 				it1 ++;
+                auto tSceneType = en_GameEndScene;
+                NotificationCenter::getInstance()->postNotification("changeScene", reinterpret_cast<Ref*>(&tSceneType));
 				continue;
 				//游戏结束
 			}
-			if (bird->getTileGIDAt(Vec2(px2,py1))){
-				BulletsBox::getInstance()->deleteBullet((*it1));
-				(*it1)->doDead();
-				it1 ++;
-				continue;
-				//游戏结束
-			}
-			if (bird->getTileGIDAt(Vec2(px3,py1))){
-				BulletsBox::getInstance()->deleteBullet((*it1));
-				(*it1)->doDead();
-				it1 ++;
-				continue;
-				//游戏结束
-			}
-		}else if (r == 90.0f){
+        }
+        else if (r == 90.0f){
 			px1 = (bpoint.x + bsize.width/2)/16;
 			py1 = maphigth - bpoint.y/16;
 			py2 = maphigth - (bpoint.y + bsize.width/2)/16;
@@ -149,28 +138,16 @@ void BulletLayer::update(float t){
 				it1 ++;
 				continue;
 			}
-			if (bird->getTileGIDAt(Vec2(px1,py1))){
+			if (bird->getTileGIDAt(Vec2(px1,py1)) || bird->getTileGIDAt(Vec2(px1,py3)) || bird->getTileGIDAt(Vec2(px1,py2))){
 				BulletsBox::getInstance()->deleteBullet((*it1));
 				(*it1)->doDead();
 				it1 ++;
+                auto tSceneType = en_GameEndScene;
+                NotificationCenter::getInstance()->postNotification("changeScene", reinterpret_cast<Ref*>(&tSceneType));
 				continue;
 				//游戏结束
 			}
-			if (bird->getTileGIDAt(Vec2(px1,py2))){
-				BulletsBox::getInstance()->deleteBullet((*it1));
-				(*it1)->doDead();
-				it1 ++;
-				continue;
-				//游戏结束
-			}
-			if (bird->getTileGIDAt(Vec2(px1,py3))){
-				BulletsBox::getInstance()->deleteBullet((*it1));
-				(*it1)->doDead();
-				it1 ++;
-				continue;
-				//游戏结束
-			}
-		}else if (r == 180.0f){
+        }else if (r == 180.0f){
 			py1 = maphigth - (bpoint.y - bsize.height)/16;
 			px1	= bpoint.x/16;
 			px2 = (bpoint.x + bsize.width/2)/16;
@@ -206,24 +183,12 @@ void BulletLayer::update(float t){
 				it1 ++;
 				continue;
 			}
-			if (bird->getTileGIDAt(Vec2(px1,py1))){
+			if (bird->getTileGIDAt(Vec2(px1,py1)) || bird->getTileGIDAt(Vec2(px2,py1)) || bird->getTileGIDAt(Vec2(px3,py1))){
 				BulletsBox::getInstance()->deleteBullet((*it1));
 				(*it1)->doDead();
 				it1 ++;
-				continue;
-				//游戏结束
-			}
-			if (bird->getTileGIDAt(Vec2(px2,py1))){
-				BulletsBox::getInstance()->deleteBullet((*it1));
-				(*it1)->doDead();
-				it1 ++;
-				continue;
-				//游戏结束
-			}
-			if (bird->getTileGIDAt(Vec2(px3,py1))){
-				BulletsBox::getInstance()->deleteBullet((*it1));
-				(*it1)->doDead();
-				it1 ++;
+                auto tSceneType = en_GameEndScene;
+                NotificationCenter::getInstance()->postNotification("changeScene", reinterpret_cast<Ref*>(&tSceneType));
 				continue;
 				//游戏结束
 			}
@@ -263,34 +228,23 @@ void BulletLayer::update(float t){
 				it1 ++;
 				continue;
 			}
-			if (bird->getTileGIDAt(Vec2(px1,py1))){
+			if (bird->getTileGIDAt(Vec2(px1,py1)) || bird->getTileGIDAt(Vec2(px1,py3)) || bird->getTileGIDAt(Vec2(px1,py2))){
 				BulletsBox::getInstance()->deleteBullet((*it1));
 				(*it1)->doDead();
 				it1 ++;
+                auto tSceneType = en_GameEndScene;
+                NotificationCenter::getInstance()->postNotification("changeScene", reinterpret_cast<Ref*>(&tSceneType));
 				continue;
 				//游戏结束
 			}
-			if (bird->getTileGIDAt(Vec2(px1,py2))){
-				BulletsBox::getInstance()->deleteBullet((*it1));
-				(*it1)->doDead();
-				it1 ++;
-				continue;
-				//游戏结束
-			}
-			if (bird->getTileGIDAt(Vec2(px1,py3))){
-				BulletsBox::getInstance()->deleteBullet((*it1));
-				(*it1)->doDead();
-				it1 ++;
-				continue;
-				//游戏结束
-			}
-		}
+        }
 		if (!(*it1) || !tan){
 			return;
 		}
 		if ((*it1)->getEntityType() == 2){
 			if (Detections::getInstance()->BulletBullet((*it1))){
-				log("zhutan sile");
+//				log("zhutan sile");
+                tanks::getInstance()->doDead();
 			}
 		}
 		for (auto it2 = v.begin(); it2 != it1;){
