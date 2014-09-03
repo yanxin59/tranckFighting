@@ -68,7 +68,7 @@ void tanks::addFire(){
 void tanks::doDead(){
  
     doAction();
-    
+    log("%d", _tankLifeCount);
     if(--_tankLifeCount == 0)
     {
         auto tSceneType = en_GameEndScene;
@@ -77,11 +77,11 @@ void tanks::doDead(){
 }
 void tanks::doAction()
 {
-    auto map = TMXTiledMap::create("mapNewer.tmx");
-    auto playerPosValueMap = map->getObjectGroup("object")->getObject("player");
-    setPosition(Vec2(playerPosValueMap.at("x").asFloat(), playerPosValueMap.at("y").asFloat()));
-    auto pBlink = Blink::create(2, 3);
-    runAction(pBlink);
+//    auto map = TMXTiledMap::create("mapNewer.tmx");
+//    auto playerPosValueMap = map->getObjectGroup("object")->getObject("player");
+//    setPosition(Vec2(playerPosValueMap.at("x").asFloat(), playerPosValueMap.at("y").asFloat()));
+//    auto pBlink = Blink::create(2, 3);
+//    runAction(pBlink);
 }
 
 Rect tanks::getBoundingBox()
@@ -104,14 +104,12 @@ void tanks::up(){
     if (getPositionY() >= (s.height - _tankSize.height/2))
     {
         setPositionY(s.height - _tankSize.height/2);
-    }//如果坦克要出了上边界,就让它停留在上边界
-
+    }
+    //如果坦克要出了上边界,就让它停留在上边界
 }
 
 void tanks::down(){
     setRotation(en_Down);
-    
-
     if(judge())
         return ;
     SimpleAudioEngine::getInstance()->playEffect("move.aif");
@@ -122,9 +120,7 @@ void tanks::down(){
     }
 }
 void tanks::left(){
- 
     setRotation(en_Left);
-    
     if(judge())
         return ;
     SimpleAudioEngine::getInstance()->playEffect("move.aif");

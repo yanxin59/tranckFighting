@@ -243,8 +243,11 @@ void BulletLayer::update(float t){
 		}
 		if ((*it1)->getEntityType() == 2){
 			if (Detections::getInstance()->BulletBullet((*it1))){
-//				log("zhutan sile");
+                BulletsBox::getInstance()->deleteBullet((*it1));
+				(*it1)->doDead();
+				it1 ++;
                 tanks::getInstance()->doDead();
+                continue;
 			}
 		}
 		for (auto it2 = v.begin(); it2 != it1;){
