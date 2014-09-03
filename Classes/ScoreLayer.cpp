@@ -43,7 +43,10 @@ void ScoreLayer::registerScoreEvent()
 
 void ScoreLayer::changeEnemyCount(cocos2d::Ref *pData)
 {
-    _enemyCount += *(reinterpret_cast<int*>(pData));
+    if(pData)
+        _enemyCount = *(reinterpret_cast<int*>(pData));
+    else
+        --_enemyCount;
     _pEnemyCountLabel->setString(StringUtils::format("%d", _enemyCount));
 }
 

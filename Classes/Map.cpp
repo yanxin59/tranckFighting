@@ -20,7 +20,7 @@ bool Maps::init(){
 	if(!Layer::init()){
 		return false;
 	}
-	TMXTiledMap* map = TMXTiledMap::create("mapNew.tmx");
+	TMXTiledMap* map = TMXTiledMap::create("mapNewer.tmx");
 	this->addChild(map);
 	m_Map = map;
 	m_Map->retain();

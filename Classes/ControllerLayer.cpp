@@ -132,8 +132,8 @@ bool ControllerLayer::init(){
  
         tank->addFire();
     });
-    item->setScale(0.5);
-    item->setOpacity(100);
+    item->setScale(0.8);
+    item->setOpacity(50);
     item->setPosition(Vec2(Director::getInstance()->getVisibleSize().width - (tControl->getContentSize().width/2),tControl->getContentSize().height/2));
 
  
@@ -141,9 +141,6 @@ bool ControllerLayer::init(){
     this->addChild(menu,1);
     menu->setPosition(Vec2(0,0));
     
-//    auto tControlFireButton = Sprite::create("control_bg.png");
-//    tControlFireButton->setPosition(Vec2(Director::getInstance()->getVisibleSize().width - (tControl->getContentSize().width/2),tControl->getContentSize().height/2));
-//    this->addChild(tControlFireButton);
     scheduleUpdate();
     
     return true;

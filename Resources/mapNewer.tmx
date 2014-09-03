@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="60" height="40" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="meta" tilewidth="16" tileheight="16">
+  <image source="./tile.png" width="224" height="32"/>
+ </tileset>
+ <layer name="bg" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztlEsOxCAMQ9v7X7p7JJSfbQLFEgtmmsSPmj7P1dVVVa9odVEXXtV89vl35WVxR3nRcy3eVflBn7vXTxde1nz0fa7yjnsVb5YbzRudW+VFn6fl1/Jv1Vfz3IWXdV+jftm8417FO/Ot5q3WZc+16rPqO1un5p8JlbvTeFX3F7WfKfs+s31Ue5RPVJ9deHfJ90xRnuhS8aF4s/12461qV95T86xaUf/Zei9vtB7VX83LVtY/mtfqvyrfXr/V+i731+sXVR/9PypvflX5mPlAiZ0f73zrdxQ36hzRvNnnVH2y/Vi5Qc1j5fkvvCx188PW+K07Xat5P5JdA8c=
+  </data>
+ </layer>
+ <layer name="iron" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt1rsKgDAQAEHB//9nG23sgk+yM5A67AXCLQsAI9b9VNR6ecZ6OrOr9Y6qzaXWy7/V/qeveytzPtR6Z1F7t1ovAMBf3b2XvbHnXbmj1gsARRvAPgCF
+  </data>
+ </layer>
+ <layer name="bird" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztzsEJADAIBEH/SQOm/0JjFQoyA/u+iwAAAAAAAAAAADY51Z0+0SirN7T9AV5QAEs=
+  </data>
+ </layer>
+ <layer name="grass" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztlzkOwDAIBN3k/1/OCyJkBZZrRqI0yyAanwMAAAqej5pKlm+VPVf39Z6v+j1X8VXfRXY/fGPAN6dflu/fXHxj33nn3M6Bb+w7775V9q7q2933Fnx751jgq8nZ8n9X51pzTAff2Wz1tWoK23wBAACgPy/ZaAMN
+  </data>
+ </layer>
+ <layer name="water" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt18ENgDAMBMH86L9jKkACodjgm5Hyvmx+WQsAINPx8PxdWu9demfv662ld9Ze977e2r3u/d07ab3dvnKPKrt7vSfMlfYvf9s79V2u6J0trRcAEpymkgK9
+  </data>
+ </layer>
+ <objectgroup name="object">
+  <object x="15.0436" y="18.0524" width="33.096" height="31.0902"/>
+  <object x="910.641" y="17.0494" width="33.096" height="32.0931"/>
+  <object x="481.396" y="2.00582" width="33.096" height="31.0902"/>
+  <object x="399.158" y="575.669" width="31.0902" height="34.0989"/>
+ </objectgroup>
+</map>

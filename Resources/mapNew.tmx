@@ -45,12 +45,12 @@
  </tileset>
  <layer name="bg" width="60" height="40">
   <data encoding="base64" compression="zlib">
-   eJztlUsOwCAIBdv7X7qbrkyV3wO1vkm6gBhgjNrrIoSguN/PG1vXze5PX92cEn/yvZtvtEaCvuv5atjVF9W/B33X8JU+qW6PrPvk7XeqrzaW8lG8+9jLV98nK7v5Sutnn+fsfm1e079qbzKhb20/qa/1/xSdqxdH82jf6D5k+WahfZel2Pq+r/oe0NcWe/OW2bxnc1TTG3vzGv7g6633tS5yd9DzoetV+6Leq2g9y+xf0LfmPGt9R/XpG/dFY92/6vOMhr7x8yzdDU9/FLN9Vwbxpu3Eab7EzgOHBwK1
+   eJztlckKwCAMRNv//+leeipqtklcOg+EJkjiE7XXRQhBcb/DG1vnze5PX906JU7yvT9jNEeCvuv5atjVF9W/B33X8JWGVLdH1n3y9vurrzaW8lG8+9jLV98nK7v5SvNnn+fsft+8pn/V3mRC39p+Ul/r/ym6rl4czaN9o/uQ5ZuF9l2WYuv7vup7QF9b7M1b1uY9m6Oa3tib13CCr7dea17k7qDXh65X7Yt6r6L1LGtvQd+a86z1HdWnb9wXjXX/qs8zGvrGz7N0Nzz9Ucz2XRnEm1ZNZO939W19n8ps3weUNwK9
   </data>
  </layer>
  <layer name="iron" width="60" height="40">
   <data encoding="base64" compression="zlib">
-   eJzt1UEKwCAMBEDB//+5l54KhR6UpO4MBDypixrHAKrNu1Kk5WWvv9ynVftMywvwlT5bOw+9pJ1rWl4AOEHa/52WF3ZIe0dpeYGzdepp81E71+hgvoxPVZ33AgDPAIU=
+   eJzt1UsKgCAAQEGh+9+5TdC2RWL5ZsCt+PA3BrDacY2KWi9z/eU8vbXOWi/AU97ZtfPwLbV9rfUCwA5q/3etF2ao3aNaL7C32ptW6+V2AtkwAG0=
   </data>
  </layer>
  <layer name="bird" width="60" height="40">

@@ -19,17 +19,6 @@ bool BulletLayer::init(){
 	if (!Layer::init()){
 		return false;
 	}
-	//auto b = Bullet::create(0, Vec2(480, 320));
-	//addBullet(b);
-	//auto b1 = Bullet::create(90, Vec2(180, 220), 1);
-	//b1->setName("1");
-	//addBullet(b1);
-	//auto b2 = Bullet::create(180, Vec2(480, 320));
-	//addBullet(b2);
-	//auto b3 = Bullet::create(270, Vec2(580, 220), 1);
-	//addBullet(b3);
-	//b3->setName("3");
-	//this->schedule(schedule_selector(BulletLayer::update, this), 1);
 	this->scheduleUpdate();
 	return true;
 }
@@ -45,7 +34,6 @@ void BulletLayer::update(float t){
 	auto ev = EnemyVector::getInstence()->getEV();
 	auto gamescene = dynamic_cast<GameScene*>(Director::getInstance()->getRunningScene());
 	auto map = gamescene->getMap();
-	cocos2d::TMXTiledMap *mMap = map->m_Map;
 	cocos2d::TMXLayer *bg = map->m_bg;
 	cocos2d::TMXLayer *bird = map->m_bird;
 	cocos2d::TMXLayer *iron = map->m_iron;
@@ -160,28 +148,15 @@ void BulletLayer::update(float t){
 				it1 ++;
 				continue;
 			}
-			if (bird->getTileGIDAt(Vec2(px1,py1))){
+			if (bird->getTileGIDAt(Vec2(px1,py1)) || bird->getTileGIDAt(Vec2(px1,py2)) || bird->getTileGIDAt(Vec2(px1,py3))){
 				BulletsBox::getInstance()->deleteBullet((*it1));
 				(*it1)->doDead();
 				it1 ++;
+                log("game over");
 				continue;
 				//游戏结束
 			}
-			if (bird->getTileGIDAt(Vec2(px1,py2))){
-				BulletsBox::getInstance()->deleteBullet((*it1));
-				(*it1)->doDead();
-				it1 ++;
-				continue;
-				//游戏结束
-			}
-			if (bird->getTileGIDAt(Vec2(px1,py3))){
-				BulletsBox::getInstance()->deleteBullet((*it1));
-				(*it1)->doDead();
-				it1 ++;
-				continue;
-				//游戏结束
-			}
-		}else if (r == 180.0f){
+        }else if (r == 180.0f){
 			py1 = maphigth - (bpoint.y - bsize.height)/16;
 			px1	= bpoint.x/16;
 			px2 = (bpoint.x + bsize.width/2)/16;
@@ -217,21 +192,7 @@ void BulletLayer::update(float t){
 				it1 ++;
 				continue;
 			}
-			if (bird->getTileGIDAt(Vec2(px1,py1))){
-				BulletsBox::getInstance()->deleteBullet((*it1));
-				(*it1)->doDead();
-				it1 ++;
-				continue;
-				//游戏结束
-			}
-			if (bird->getTileGIDAt(Vec2(px2,py1))){
-				BulletsBox::getInstance()->deleteBullet((*it1));
-				(*it1)->doDead();
-				it1 ++;
-				continue;
-				//游戏结束
-			}
-			if (bird->getTileGIDAt(Vec2(px3,py1))){
+			if (bird->getTileGIDAt(Vec2(px1,py1)) || bird->getTileGIDAt(Vec2(px3,py1)) || bird->getTileGIDAt(Vec2(px2,py1))){
 				BulletsBox::getInstance()->deleteBullet((*it1));
 				(*it1)->doDead();
 				it1 ++;
@@ -274,28 +235,15 @@ void BulletLayer::update(float t){
 				it1 ++;
 				continue;
 			}
-			if (bird->getTileGIDAt(Vec2(px1,py1))){
+			if (bird->getTileGIDAt(Vec2(px1,py1)) || bird->getTileGIDAt(Vec2(px1,py2)) || bird->getTileGIDAt(Vec2(px1,py3))){
 				BulletsBox::getInstance()->deleteBullet((*it1));
 				(*it1)->doDead();
 				it1 ++;
+                log("game over!");
 				continue;
 				//游戏结束
 			}
-			if (bird->getTileGIDAt(Vec2(px1,py2))){
-				BulletsBox::getInstance()->deleteBullet((*it1));
-				(*it1)->doDead();
-				it1 ++;
-				continue;
-				//游戏结束
-			}
-			if (bird->getTileGIDAt(Vec2(px1,py3))){
-				BulletsBox::getInstance()->deleteBullet((*it1));
-				(*it1)->doDead();
-				it1 ++;
-				continue;
-				//游戏结束
-			}
-		}
+        }
 		if (!(*it1) || !tan){
 			return;
 		}
