@@ -36,13 +36,13 @@ void Enemy::addFire(float t){
 	auto b = Bullet::create((float)jd, p, mark);
 	auto s = dynamic_cast<GameScene*>(Director::getInstance()->getRunningScene());
     s->getLayer()->addBullet(b);
-    SimpleAudioEngine::getInstance()->playEffect("bullet.aif");
+    //SimpleAudioEngine::getInstance()->playEffect("bullet.aif");
 
 }
 bool Enemy::hurt(int attackValue){
 	HP -= attackValue;
 	if(HP <= 0){
-		this->die();
+		this->doAction();
 		return true;                       //·µ»ØÕæÎªËÀÍö
 	}
 	return false;
@@ -65,7 +65,7 @@ int Enemy::makeTurn(){
 }
 void Enemy::move(float t){
     
-    SimpleAudioEngine::getInstance()->playEffect("move.aif");
+    //SimpleAudioEngine::getInstance()->playEffect("move.aif");
     
 	int key = 1;
 
@@ -159,5 +159,9 @@ void Enemy::move(float t){
 	}
 }
 void Enemy::doAction(){
-
+	this->unscheduleAllSelectors();
+	Blink * blink = Blink::create(0.5,3);
+	CallFunc * cf = CallFunc::create(CC_CALLBACK_0(Enemy::die,this));
+	Sequence * seq = Sequence::create(blink,cf,NULL);
+	this->runAction(seq);
 }
