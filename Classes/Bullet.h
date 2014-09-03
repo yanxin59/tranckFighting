@@ -6,7 +6,7 @@ USING_NS_CC;
 
 
 //×Óµ¯¹¥»÷
-#define BULLETATTACK 100
+#define BULLETATTACK 200
 
 //×Óµ¯Àà
 class Bullet:public Entity{

@@ -14,6 +14,7 @@
 #include "PopTank.h"
 #include "GameScene.h"
 #include "Map.h"
+
 bool EnemyLayer::init(){
 	if(!Layer::init()){
 		return false;
@@ -24,6 +25,7 @@ bool EnemyLayer::init(){
 
 	tanks * main = tanks::getInstance();
 	addChild(main);
+    main->setRotation(en_Up);
 
     auto map = TMXTiledMap::create("mapNew.tmx");
     auto playerPosValueMap = map->getObjectGroup("object")->getObject("player");
@@ -31,6 +33,12 @@ bool EnemyLayer::init(){
     
 	return true;
 }
+
+void EnemyLayer::onExit()
+{
+    Layer::onExit();
+}
+
 void EnemyLayer::createEnemy(){
 	//在层中几个位置中随机生成坦克
 }

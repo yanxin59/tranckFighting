@@ -9,7 +9,6 @@
 #include "stopScene.h"
 #include "config.h"
 
-
 bool stopScene::init(){
     
     if (!Scene::init()) {
@@ -26,15 +25,16 @@ bool stopScene::init(){
     loseSp->setPosition(Vec2(480,320));
     loseSp->setScale(4.0, 4.0);
     
+
     
     MenuItemImage * image = MenuItemImage::create("close.png","open.png",[=](Ref * sender){
         
         auto tSceneType = en_GameScene;
         
         NotificationCenter::getInstance()->postNotification("changeScene", reinterpret_cast<Ref *>(& tSceneType));
-    
     });
-    Size s = Director::getInstance()->getVisibleSize();
+
+        Size s = Director::getInstance()->getVisibleSize();
     Size sbutton = image->getContentSize();
     image->setPosition(Vec2(s.width-sbutton.width/2,sbutton.height/2));
     
@@ -45,7 +45,6 @@ bool stopScene::init(){
     
     
     
-    
-    
+       
     return true;
 }

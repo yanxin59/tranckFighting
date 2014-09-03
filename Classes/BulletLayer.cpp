@@ -20,13 +20,13 @@ bool BulletLayer::init(){
 	if (!Layer::init()){
 		return false;
 	}
+
 	this->scheduleUpdate();
 	return true;
 }
 
 //将子弹贴在层上的函数
-void BulletLayer::addBullet(Bullet* b)
-{
+void BulletLayer::addBullet(Bullet* b){
 	this->addChild(b);
 }
 
@@ -92,7 +92,7 @@ void BulletLayer::update(float t){
 				it1 ++;
 				continue;
 			}
-			if (bird->getTileGIDAt(Vec2(px1,py1)) || bird->getTileGIDAt(Vec2(px2,py1)) || bird->getTileGIDAt(Vec2(px3,py1))){
+			if (bird->getTileGIDAt(Vec2(px1,py1)) || bird->getTileGIDAt(Vec2(px3,py1)) || bird->getTileGIDAt(Vec2(px2,py1))){
 				BulletsBox::getInstance()->deleteBullet((*it1));
 				(*it1)->doDead();
 				it1 ++;
@@ -101,8 +101,8 @@ void BulletLayer::update(float t){
 				continue;
 				//游戏结束
 			}
-			
-		}else if (r == 90.0f){
+        }
+        else if (r == 90.0f){
 			px1 = (bpoint.x + bsize.width/2)/16;
 			py1 = maphigth - bpoint.y/16;
 			py2 = maphigth - (bpoint.y + bsize.width/2)/16;
@@ -138,7 +138,7 @@ void BulletLayer::update(float t){
 				it1 ++;
 				continue;
 			}
-			if (bird->getTileGIDAt(Vec2(px1,py1)) || bird->getTileGIDAt(Vec2(px1,py2)) || bird->getTileGIDAt(Vec2(px1,py3))){
+			if (bird->getTileGIDAt(Vec2(px1,py1)) || bird->getTileGIDAt(Vec2(px1,py3)) || bird->getTileGIDAt(Vec2(px1,py2))){
 				BulletsBox::getInstance()->deleteBullet((*it1));
 				(*it1)->doDead();
 				it1 ++;
@@ -183,7 +183,7 @@ void BulletLayer::update(float t){
 				it1 ++;
 				continue;
 			}
-			if (bird->getTileGIDAt(Vec2(px1,py1)) || bird->getTileGIDAt(Vec2(px3,py1)) || bird->getTileGIDAt(Vec2(px2,py1))){
+			if (bird->getTileGIDAt(Vec2(px1,py1)) || bird->getTileGIDAt(Vec2(px2,py1)) || bird->getTileGIDAt(Vec2(px3,py1))){
 				BulletsBox::getInstance()->deleteBullet((*it1));
 				(*it1)->doDead();
 				it1 ++;
@@ -228,7 +228,7 @@ void BulletLayer::update(float t){
 				it1 ++;
 				continue;
 			}
-			if (bird->getTileGIDAt(Vec2(px1,py1)) || bird->getTileGIDAt(Vec2(px1,py2)) || bird->getTileGIDAt(Vec2(px1,py3))){
+			if (bird->getTileGIDAt(Vec2(px1,py1)) || bird->getTileGIDAt(Vec2(px1,py3)) || bird->getTileGIDAt(Vec2(px1,py2))){
 				BulletsBox::getInstance()->deleteBullet((*it1));
 				(*it1)->doDead();
 				it1 ++;
@@ -243,7 +243,8 @@ void BulletLayer::update(float t){
 		}
 		if ((*it1)->getEntityType() == 2){
 			if (Detections::getInstance()->BulletBullet((*it1))){
-				log("zhutan sile");
+//				log("zhutan sile");
+                tanks::getInstance()->doDead();
 			}
 		}
 		for (auto it2 = v.begin(); it2 != it1;){

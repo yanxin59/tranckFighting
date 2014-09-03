@@ -13,17 +13,24 @@
 #include "BulletLayer.h"
 #include "SimpleAudioEngine.h"
 #include "stopScene.h"
-
+#include "config.h"
 using namespace CocosDenshion;
 
 tanks * tanks::instance = nullptr;
 
 tanks * tanks::getInstance()
 {
-    if (!instance) {
+    if (!instance)
+    {
         instance = tanks::create();
+        instance->retain();
     }
     return instance;
+}
+
+void tanks::delInstance()
+{
+    if(instance) CC_SAFE_RELEASE_NULL(instance);
 }
 
 tanks::tanks()
@@ -31,6 +38,16 @@ tanks::tanks()
     setbindSprite(Sprite::create("p1-a-cell.png"));
     this->addChild(getbindSprite());
     _tankSize = getbindSprite()->getContentSize();
+    initTank();
+}
+
+void tanks::initTank()
+{
+    setRotation(en_Up);
+    _tankLifeCount = 3;
+    auto map = TMXTiledMap::create("mapNewer.tmx");
+    auto playerPosValueMap = map->getObjectGroup("object")->getObject("player");
+    setPosition(Vec2(playerPosValueMap.at("x").asFloat(), playerPosValueMap.at("y").asFloat()));
 }
 
 void tanks::addFire(){
@@ -52,16 +69,19 @@ void tanks::doDead(){
  
     doAction();
     
-    auto scene = stopScene::create();
-    
-    Director::getInstance()->replaceScene(scene);
-    
+    if(--_tankLifeCount == 0)
+    {
+        auto tSceneType = en_GameEndScene;
+        NotificationCenter::getInstance()->postNotification("changeScene", reinterpret_cast<Ref *>(&tSceneType));
+    }
 }
-void tanks::doAction(){
-    
-    SimpleAudioEngine::getInstance()->playEffect("tankbomb.aif");
-    
-    SimpleAudioEngine::getInstance()->playEffect("gameover.aif");
+void tanks::doAction()
+{
+    auto map = TMXTiledMap::create("mapNewer.tmx");
+    auto playerPosValueMap = map->getObjectGroup("object")->getObject("player");
+    setPosition(Vec2(playerPosValueMap.at("x").asFloat(), playerPosValueMap.at("y").asFloat()));
+    auto pBlink = Blink::create(2, 3);
+    runAction(pBlink);
 }
 
 Rect tanks::getBoundingBox()
@@ -194,10 +214,8 @@ bool tanks::judge()
             return true;
         }
     }
-    return false;
-    
+    return false;    
 }
-
 
 void tanks::move()
 {
