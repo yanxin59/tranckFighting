@@ -19,11 +19,14 @@ bool Enemy::init(){
 	mark = 2;
 	_entityType = mark;
 	speed = TIME;
+	setScore(100);
+	death = true;
 	EnemyVector::getInstence()->addEnemy(this);      //将坦克加入数组单例中
 	sp = Sprite::create("p1-a-cell.png");
 	Size sizep = sp->getContentSize();
 	sp->setPosition(sizep/2);                        //Rect 基点为左下角 设基点与node位置重合
 	addChild(sp);
+	setbindSprite(sp);
 	//schedule(schedule_selector(Enemy::changejd),3);  //方向改变计时器
 	schedule(schedule_selector(Enemy::move),speed);    //行走即障碍规避计时器
 	schedule(schedule_selector(Enemy::addFire), 1.2);
@@ -41,7 +44,12 @@ void Enemy::addFire(float t){
 }
 bool Enemy::hurt(int attackValue){
 	HP -= attackValue;
-	if(HP <= 0){
+	if(HP <= 0 && death){
+		int t_score = getScore();
+		Ref * p_score = (Ref *)(&t_score);
+		auto center = __NotificationCenter::getInstance();
+		center->postNotification("addScore",p_score);
+		death = false;
 		this->doAction();
 		return true;                       //返回真为死亡
 	}
@@ -160,8 +168,17 @@ void Enemy::move(float t){
 }
 void Enemy::doAction(){
 	this->unscheduleAllSelectors();
-	Blink * blink = Blink::create(0.5,3);
+	//Blink * blink = Blink::create(0.5,3);
+	Animation * ani = Animation::create();
+	for(int i = 1;i < 6;i++){
+		String * str = String::createWithFormat("blast%d.png",i);
+		SpriteFrame * sf = SpriteFrame::create(str->getCString(),Rect(0,0,41,32));
+		ani->addSpriteFrame(sf);
+	}
+	ani->setDelayPerUnit(0.1);
+	ani->setLoops(1);
+	Animate * ai = Animate::create(ani);
 	CallFunc * cf = CallFunc::create(CC_CALLBACK_0(Enemy::die,this));
-	Sequence * seq = Sequence::create(blink,cf,NULL);
-	this->runAction(seq);
+	Sequence * seq = Sequence::create(ai,cf,NULL);
+	getbindSprite()->runAction(seq);
 }
