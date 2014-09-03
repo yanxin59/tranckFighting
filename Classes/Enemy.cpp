@@ -27,7 +27,7 @@ bool Enemy::init(){
 	sp->setPosition(sizep/2);                        //Rect 基点为左下角 设基点与node位置重合
 	addChild(sp);
 	setbindSprite(sp);
-	//schedule(schedule_selector(Enemy::changejd),3);  //方向改变计时器
+	schedule(schedule_selector(Enemy::changejd),3);  //方向改变计时器
 	schedule(schedule_selector(Enemy::move),speed);    //行走即障碍规避计时器
 	schedule(schedule_selector(Enemy::addFire), 1.2);
 	
