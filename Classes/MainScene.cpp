@@ -36,7 +36,7 @@ bool MainScene::init(){
     auto act = JumpBy::create(3, Vec2(0,0), 50, 2);
     item->runAction(act);
     
-    SimpleAudioEngine::getInstance()->playEffect("startSound.wav");
+//    SimpleAudioEngine::getInstance()->playEffect("startSound.wav");
     
     return true;
 }

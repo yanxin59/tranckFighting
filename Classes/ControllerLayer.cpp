@@ -132,7 +132,8 @@ bool ControllerLayer::init(){
  
         tank->addFire();
     });
-    
+    item->setScale(0.5);
+    item->setOpacity(100);
     item->setPosition(Vec2(Director::getInstance()->getVisibleSize().width - (tControl->getContentSize().width/2),tControl->getContentSize().height/2));
 
  
@@ -140,25 +141,27 @@ bool ControllerLayer::init(){
     this->addChild(menu,1);
     menu->setPosition(Vec2(0,0));
     
-    auto tControlFireButton = Sprite::create("control_bg.png");
-    tControlFireButton->setPosition(Vec2(Director::getInstance()->getVisibleSize().width - (tControl->getContentSize().width/2),tControl->getContentSize().height/2));
-    this->addChild(tControlFireButton);
+//    auto tControlFireButton = Sprite::create("control_bg.png");
+//    tControlFireButton->setPosition(Vec2(Director::getInstance()->getVisibleSize().width - (tControl->getContentSize().width/2),tControl->getContentSize().height/2));
+//    this->addChild(tControlFireButton);
     scheduleUpdate();
     
     return true;
 }
 void ControllerLayer::update(float t){
     
+    
     if (_iLeft == 1) {
-        tanks::getInstance()->left();
+        tanks::getInstance()->move(en_Left);
     }
     if (_iLeft == 2) {
-        tanks::getInstance()->right();
+        tanks::getInstance()->move(en_Right);
     }
     if (_iUp == 1) {
-        tanks::getInstance()->up();
+        tanks::getInstance()->move(en_Up);
     }
     if (_iUp == 2) {
-        tanks::getInstance()->down();
+        tanks::getInstance()->move(en_Down);
     }
+//    tanks::getInstance()->move(tRotation);
 }

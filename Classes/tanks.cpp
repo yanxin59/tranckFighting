@@ -74,10 +74,10 @@ void tanks::up(){
     
     setRotation(en_Up);//角度为0,方向朝上
     
-    SimpleAudioEngine::getInstance()->playEffect("move.aif");
-    
     if(judge())//如果前方有障碍物,停止向前
         return ;
+    
+    SimpleAudioEngine::getInstance()->playEffect("move.aif");
     setPositionY(getPositionY()+1);//一步一步移动
     Size s = Director::getInstance()->getVisibleSize();//屏幕尺寸
     Size tSize = _pTank->getContentSize();//坦克尺寸
@@ -94,7 +94,7 @@ void tanks::down(){
 
     if(judge())
         return ;
-     SimpleAudioEngine::getInstance()->playEffect("move.aif");
+    SimpleAudioEngine::getInstance()->playEffect("move.aif");
     setPositionY(getPositionY()-1);
     Size  sSize = _pTank->getContentSize();
     if (getPositionY() < sSize.height/2) {
@@ -106,10 +106,9 @@ void tanks::left(){
  
     setRotation(en_Left);
     
-     SimpleAudioEngine::getInstance()->playEffect("move.aif");
     if(judge())
         return ;
-
+    SimpleAudioEngine::getInstance()->playEffect("move.aif");
     setPositionX(getPositionX()-1);
     Size sSize = _pTank->getContentSize();
     if (getPositionX() < sSize.width/2) {
@@ -120,15 +119,35 @@ void tanks::left(){
 void tanks::right(){
 
     setRotation(en_Right);
-    
-     SimpleAudioEngine::getInstance()->playEffect("move.aif");
+
     if(judge())
         return ;
+    SimpleAudioEngine::getInstance()->playEffect("move.aif");
     setPositionX(getPositionX()+1);
     Size s = Director::getInstance()->getVisibleSize();
     Size sSize = _pTank->getContentSize();
     if (getPositionX() >= (s.width-sSize.width/2 )) {
         setPositionX(s.width-sSize.width/2);
+    }
+}
+
+void tanks::move(const Rotation &rRotation)
+{
+    switch (rRotation) {
+        case en_Up:
+            up();
+            break;
+        case en_Right:
+            right();
+            break;
+        case en_Down:
+            down();
+            break;
+        case en_Left:
+            left();
+            break;
+        default:
+            break;
     }
 }
 
@@ -139,13 +158,12 @@ bool tanks::judge()
     
     auto tMap = (dynamic_cast<GameScene *>(Director::getInstance()->getRunningScene()))->getMap();
     auto tBg = tMap->m_bg;
+    auto tIron = tMap->m_iron;
+    
     auto tRotate = getRotation();
     auto tBgheight = tBg->getLayerSize().height;
-    
     auto tBgWidth = tBg->getLayerSize().width;
-    
     auto tBgZero = 0;
-    
     auto px1 = 0;
     auto px2 = 0;
     
@@ -159,20 +177,22 @@ bool tanks::judge()
         px2 = (getPositionX() + SEGMENTSIZE / 2) / SEGMENTSIZE;
         
         if(py1 < tBgZero) py1 = tBgZero;
-        if(tBg->getTileGIDAt(Vec2(px1, py1)) || tBg->getTileGIDAt(Vec2(px2, py1)))
+        if(py1 > tBgheight - 1) py1 = tBgheight - 1;
+        if(tBg->getTileGIDAt(Vec2(px1, py1)) || tBg->getTileGIDAt(Vec2(px2, py1)) || tIron->getTileGIDAt(Vec2(px1, py1)) || tIron->getTileGIDAt(Vec2(px2, py1)))
         {
             return true;
         }
     }
     
-    if(tRotate == en_Right)
+    if(tRotate == en_Right || tRotate == en_Left)
     {
         px1 = tRotate == en_Right ? (getPositionX() + SEGMENTSIZE) / SEGMENTSIZE : (getPositionX() - SEGMENTSIZE) / SEGMENTSIZE ;
         py1 = tBgheight - (getPositionY() + SEGMENTSIZE / 2) / SEGMENTSIZE;
         py2 = tBgheight - (getPositionY() - SEGMENTSIZE / 2) / SEGMENTSIZE;
 
-        if(px1 > tBgWidth) px1 = tBgWidth;
-        if(tBg->getTileGIDAt(Vec2(px1, py2)) || tBg->getTileGIDAt(Vec2(px1, py1)))
+        if(px1 > tBgWidth - 1) px1 = tBgWidth - 1;
+        if(px1 < tBgZero) px1 = tBgZero;
+        if(tBg->getTileGIDAt(Vec2(px1, py2)) || tBg->getTileGIDAt(Vec2(px1, py1)) || tIron->getTileGIDAt(Vec2(px1, py2)) || tIron->getTileGIDAt(Vec2(px1, py1)))
         {
             return true;
         }
