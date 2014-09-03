@@ -1,6 +1,8 @@
 #include "Items.h"
 #include "tanks.h"
 #include "EnemyVector.h"
+#include "GameScene.h"
+#include "BulletLayer.h"
 
 bool Items::init(){
 	if (!Node::init()){
@@ -22,6 +24,8 @@ bool Items::init(){
 	this->setPosition(Vec2(rand()%961, rand()%641));
 	itemsBox = Rect(this->getPositionX(), this->getPositionY(), _pSprite->getContentSize().width, _pSprite->getContentSize().height);
 	this->scheduleUpdate();
+	auto s = dynamic_cast<GameScene*>(Director::getInstance()->getRunningScene());
+	s->getLayer()->addChild(this);
 	return true;
 }
 
