@@ -22,7 +22,7 @@ tanks * tanks::getInstance()
 {
     if (!instance) {
         instance = tanks::create();
-
+        
     }
     return instance;
 }

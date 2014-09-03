@@ -60,7 +60,7 @@
  </layer>
  <objectgroup name="object">
   <object name="player" x="416.612" y="578.556" width="30.0379" height="26.1199"/>
-  <object x="32" y="16" width="32" height="32"/>
+  <object name="Enemy1" x="32" y="16" width="32" height="32"/>
   <object name="Enmey2" x="352" y="16" width="32" height="32"/>
   <object name="Enemy3" x="672" y="16" width="32" height="32"/>
   <object name="Enemy4" x="896" y="16" width="32" height="32"/>

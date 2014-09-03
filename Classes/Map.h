@@ -3,8 +3,18 @@
 #include "cocos2d.h"
 using namespace cocos2d;
 class Maps:public Layer{
+    
+protected:
+    
+    virtual bool init();
+    
 public:
-	virtual bool init();
+    
+
+    Maps();
+    
+    virtual ~Maps();
+    
 	cocos2d::TMXTiledMap *m_Map;
 	cocos2d::TMXLayer *m_bg;
 	cocos2d::TMXLayer *m_bird;

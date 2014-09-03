@@ -1,5 +1,21 @@
 #include "Map.h"
 
+Maps::Maps():m_Map(nullptr), m_bg(nullptr), m_iron(nullptr), m_bird(nullptr), _pObjectGroup(nullptr)
+{
+    
+}
+
+Maps::~Maps()
+{
+    CC_SAFE_RELEASE_NULL(_pObjectGroup);
+    CC_SAFE_RELEASE_NULL(m_bird);
+    CC_SAFE_RELEASE_NULL(m_iron);
+    CC_SAFE_RELEASE_NULL(m_bg);
+    CC_SAFE_RELEASE_NULL(m_Map);
+}
+
+
+
 bool Maps::init(){
 	if(!Layer::init()){
 		return false;
