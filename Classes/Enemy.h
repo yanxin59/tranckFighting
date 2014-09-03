@@ -14,7 +14,9 @@ protected:
 	int mark;                              //主机敌机标记
 	float speed;
 public:
-	virtual void doAction();
+	bool death;                            //死亡状态,假为死亡
+	CC_SYNTHESIZE(int,score,Score);
+	virtual void doAction();               //死亡动画
 	virtual bool init();
 	CREATE_FUNC(Enemy);
 	void addFire(float t);                        //开火
