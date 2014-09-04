@@ -58,6 +58,7 @@ void tanks::reset()
     _tankState = en_NormalState;
     _tankLifeCount = 3;
     setPosition(_tankInitPos);
+    setIsDead(false);
 
 }
 
@@ -201,7 +202,10 @@ bool tanks::judge()
         
         if(py1 < tBgZero) py1 = tBgZero;
         if(py1 > tBgheight - 1) py1 = tBgheight - 1;
-        if(tBg->getTileGIDAt(Vec2(px1, py1)) || tBg->getTileGIDAt(Vec2(px2, py1)) || tIron->getTileGIDAt(Vec2(px1, py1)) || tIron->getTileGIDAt(Vec2(px2, py1)) || tBrid->getTileGIDAt(Vec2(px1, py1)) || tBrid->getTileGIDAt(Vec2(px2, py1)) || tWater->getTileGIDAt(Vec2(px1, py1)) || tWater->getTileGIDAt(Vec2(px2, py1)))
+        if(tBg->getTileGIDAt(Vec2(px1, py1)) || tBg->getTileGIDAt(Vec2(px2, py1))
+           || tIron->getTileGIDAt(Vec2(px1, py1)) || tIron->getTileGIDAt(Vec2(px2, py1))
+           || tBrid->getTileGIDAt(Vec2(px1, py1)) || tBrid->getTileGIDAt(Vec2(px2, py1))
+           || tWater->getTileGIDAt(Vec2(px1, py1)) || tWater->getTileGIDAt(Vec2(px2, py1)))
         {
             return true;
         }
@@ -215,7 +219,10 @@ bool tanks::judge()
 
         if(px1 > tBgWidth - 1) px1 = tBgWidth - 1;
         if(px1 < tBgZero) px1 = tBgZero;
-        if(tBg->getTileGIDAt(Vec2(px1, py2)) || tBg->getTileGIDAt(Vec2(px1, py1)) || tIron->getTileGIDAt(Vec2(px1, py2)) || tIron->getTileGIDAt(Vec2(px1, py1)) || tBrid->getTileGIDAt(Vec2(px1, py1)) || tBrid->getTileGIDAt(Vec2(px1, py2)) || tWater->getTileGIDAt(Vec2(px1, py1)) || tWater->getTileGIDAt(Vec2(px1, py2)))
+        if(tBg->getTileGIDAt(Vec2(px1, py2)) || tBg->getTileGIDAt(Vec2(px1, py1))
+           || tIron->getTileGIDAt(Vec2(px1, py2)) || tIron->getTileGIDAt(Vec2(px1, py1))
+           || tBrid->getTileGIDAt(Vec2(px1, py1)) || tBrid->getTileGIDAt(Vec2(px1, py2))
+           || tWater->getTileGIDAt(Vec2(px1, py1)) || tWater->getTileGIDAt(Vec2(px1, py2)))
         {
             return true;
         }
