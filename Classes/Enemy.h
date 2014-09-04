@@ -29,5 +29,8 @@ public:
 	void move(float t);
 	int makeTurn();                        //转向方法
 	void move(){}
+	inline float getSpeed(){
+		return speed;
+	}
 };
 #endif

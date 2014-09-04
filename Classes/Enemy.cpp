@@ -27,9 +27,9 @@ bool Enemy::init(){
 	sp->setPosition(sizep/2);                        //Rect 基点为左下角 设基点与node位置重合
 	addChild(sp);
 	setbindSprite(sp);
-	schedule(schedule_selector(Enemy::changejd),6);  //方向改变计时器
+	schedule(schedule_selector(Enemy::changejd),4.5);  //方向改变计时器
 
-	schedule(schedule_selector(Enemy::addFire), 1.2);
+	schedule(schedule_selector(Enemy::addFire), 1.5);
 	
 	return true;
 }
@@ -168,6 +168,10 @@ void Enemy::move(float t){
 	}
 }
 void Enemy::doAction(){
+
+	auto center = __NotificationCenter::getInstance();
+	center->postNotification("changeEnemyCount",NULL);
+	
 	this->unscheduleAllSelectors();
 	//Blink * blink = Blink::create(0.5,3);
 	Animation * ani = Animation::create();
