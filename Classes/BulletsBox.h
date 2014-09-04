@@ -12,6 +12,7 @@ public:
 	void addBullet(Bullet* b);
 	//从容器删除子弹方法
 	void deleteBullet(Bullet* b);
+	void clearVector();
 protected:
 	static BulletsBox* instance;
 private:

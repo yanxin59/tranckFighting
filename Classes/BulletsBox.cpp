@@ -18,3 +18,11 @@ void BulletsBox::addBullet(Bullet* b){
 void BulletsBox::deleteBullet(Bullet* b){
 	bulletsVector.eraseObject(b);
 }
+
+//Çå¿ÕÈÝÆ÷
+void BulletsBox::clearVector(){
+	for (auto it = bulletsVector.begin(); it != bulletsVector.end(); it ++){
+		deleteBullet(*it);
+		(*it)->doDead();
+	}
+}

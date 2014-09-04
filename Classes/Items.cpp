@@ -27,11 +27,12 @@ bool Items::init(){
 	this->scheduleUpdate();
 	auto s = dynamic_cast<GameScene*>(Director::getInstance()->getRunningScene());
 	s->getLayer()->addChild(this);
-	this->schedule(schedule_selector(Items::timedoDead), 10);
+	this->schedule(schedule_selector(Items::timedoDead), 30);
 	return true;
 }
 
-void Items::doDead(){
+void Items::doDead()
+{
 	this->removeFromParentAndCleanup(true);
 }
 
@@ -41,7 +42,7 @@ void Items::update(float t){
 		{
 		case 1:EnemyVector::getInstence()->reset();break;
 		case 2:break;
-		case 3:break;
+		case 3:EnemyVector::getInstence()->delayTime();break;
 		default:
 			break;
 		}
@@ -52,13 +53,5 @@ void Items::update(float t){
 void Items::timedoDead(float t){
 	doDead();
 }
-//
-//Items* Items::instance = nullptr;
-//
-//Items* Items::getInstance(){
-//	if (!instance){
-//		instance = new Items();
-//		instance->init();
-//	}
-//	return instance;
-//}
+
+
