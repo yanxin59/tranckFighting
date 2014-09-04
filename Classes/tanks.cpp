@@ -10,6 +10,8 @@
 #include "Bullet.h"
 #include "SimpleAudioEngine.h"
 #include "config.h"
+#include "GameScene.h"
+#include "Map.h"
 
 using namespace CocosDenshion;
 
@@ -174,8 +176,9 @@ void tanks::move(const Rotation &rRotation)
 
 bool tanks::judge()
 {
-    
-    auto tMap = TMXTiledMap::create("mapNewer.tmx");
+    auto gamescene = dynamic_cast<GameScene*>(Director::getInstance()->getRunningScene());
+	auto map = gamescene->getMap();
+    auto tMap = map->m_Map;
     auto tBg = tMap->getLayer("bg");
     auto tIron = tMap->getLayer("iron");
     auto tBrid = tMap->getLayer("bird");
