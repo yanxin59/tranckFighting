@@ -116,7 +116,7 @@ void ScoreLayer::loadLabel()
     _pEnemyCountLabel->retain();
     
     auto tTankLifeCountTitle = Label::createWithSystemFont("Tank:", "Arial", 30);
-    tTankLifeCountTitle->setPosition(Vec2(_pEnemyCountLabel->getPositionX() + tTankLifeCountTitle->getContentSize().width + 20, _pEnemyCountLabel->getPositionY()));
+    tTankLifeCountTitle->setPosition(Vec2(_pEnemyCountLabel->getPositionX() + tTankLifeCountTitle->getContentSize().width + 60, _pEnemyCountLabel->getPositionY()));
     addChild(tTankLifeCountTitle);
     
     _pTankLifeCountLabel = Label::createWithSystemFont(StringUtils::format("%d", _tankLifeCount), "Arial", 30);
