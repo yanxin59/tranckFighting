@@ -29,8 +29,8 @@ void EnemyVector::delayTime(){
 		DelayTime * dt = DelayTime::create(10);
 		CallFunc * cf = CallFunc::create([=](){
 			enemy->resumeSchedulerAndActions();
-			enemy->schedule(schedule_selector(Enemy::changejd),6); 
-			enemy->schedule(schedule_selector(Enemy::addFire), 1.2);
+			enemy->schedule(schedule_selector(Enemy::changejd),4.5); 
+			enemy->schedule(schedule_selector(Enemy::addFire), 1.5);
 			enemy->schedule(schedule_selector(Enemy::move),enemy->getSpeed());
 		});
 		Sequence * seq = Sequence::create(dt,cf,NULL);
